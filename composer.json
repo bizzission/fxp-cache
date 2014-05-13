@@ -1,0 +1,33 @@
+{
+    "name": "sonatra/cache",
+    "type": "library",
+    "description": "Sonatra Cache Component",
+    "keywords": ["cache", "redis", "memcache", "memcached", "apc"],
+    "homepage": "http://sonatra.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "François Pluchino",
+            "email": "francois.pluchino@sonatra.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "psr/log": "~1.0",
+        "symfony/filesystem": "~2.1",
+        "symfony/finder": "~2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sonatra\\Component\\Cache\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
