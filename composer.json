@@ -20,6 +20,9 @@
         "symfony/filesystem": "~2.1",
         "symfony/finder": "~2.1"
     },
+    "suggest": {
+        "ext-apc": "Caching with ext/apc"
+    },
     "autoload": {
         "psr-4": {
             "Sonatra\\Component\\Cache\\": ""
