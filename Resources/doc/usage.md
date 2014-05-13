@@ -43,3 +43,27 @@ $counter = $cache->increment($counter, 4);
 
 $counter->getValue(); // will return 5
 ```
+
+## Initialisations
+
+### PHP Cache initialisation
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\PhpCache;
+
+$cache = PhpCache('var/cache');
+//...
+```
+
+### APC Cache initialisation
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\ApcCache;
+
+$cache = ApcCache('my_custom_prefix');
+//...
+```
