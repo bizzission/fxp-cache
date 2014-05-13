@@ -74,7 +74,7 @@ class PhpCache extends AbstractCache
             return new CacheElement($key, $data['data'], $data['ttl'], new \DateTime('@' . $data['createdAt']));
         }
 
-        return new CacheElement($key, null, 0, (new \DateTime())->sub(new \DateInterval('PT1S')));
+        return $this->createInvalidElement($key);
     }
 
     /**

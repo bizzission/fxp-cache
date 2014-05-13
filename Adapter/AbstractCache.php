@@ -11,6 +11,7 @@
 
 namespace Sonatra\Component\Cache\Adapter;
 
+use Sonatra\Component\Cache\CacheElement;
 use Sonatra\Component\Cache\Counter;
 
 /**
@@ -60,5 +61,17 @@ abstract class AbstractCache implements CacheInterface
         }
 
         return $this->getCounter($counter);
+    }
+
+    /**
+     * Creates the invalid cache element.
+     *
+     * @param string $key The key.
+     *
+     * @return CacheElement
+     */
+    protected function createInvalidElement($key)
+    {
+        return new CacheElement($key, null, 0, (new \DateTime())->sub(new \DateInterval('PT1S')));
     }
 }
