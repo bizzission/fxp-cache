@@ -113,9 +113,6 @@ abstract class AbstractCacheTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($cacheElement->getData());
     }
 
-    /**
-     * @group progress
-     */
     public function testCounter()
     {
         $cache = $this->getCache();
