@@ -51,6 +51,10 @@ abstract class AbstractCacheTest extends \PHPUnit_Framework_TestCase
         $cacheElement = $cache->get('foo');
         $this->assertInstanceOf('Sonatra\Component\Cache\CacheElement', $cacheElement);
 
+        // override
+        $cacheElement = $cache->set('foo', 'bar2', CacheElement::SECOND);
+        $this->assertInstanceOf('Sonatra\Component\Cache\CacheElement', $cacheElement);
+
         // flush
         $this->assertTrue($cache->flush('foo'));
         $this->assertFalse($cache->has('foo'));
@@ -80,13 +84,13 @@ abstract class AbstractCacheTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($cache->has('bar'));
 
         // flush all with prefix
-        $cache->set('prefix_foo', 'bar', CacheElement::SECOND);
-        $cache->set('prefix_bar', 'foo', CacheElement::SECOND);
+        $cache->set('custom_prefix_foo', 'bar', CacheElement::SECOND);
+        $cache->set('custom_prefix_bar', 'foo', CacheElement::SECOND);
         $cache->set('number', 42, CacheElement::SECOND);
 
-        $this->assertTrue($cache->flushAll('prefix_'));
-        $this->assertFalse($cache->has('prefix_foo'));
-        $this->assertFalse($cache->has('prefix_bar'));
+        $this->assertTrue($cache->flushAll('custom_prefix_'));
+        $this->assertFalse($cache->has('custom_prefix_foo'));
+        $this->assertFalse($cache->has('custom_prefix_bar'));
         $this->assertTrue($cache->has('number'));
     }
 
