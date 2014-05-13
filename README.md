@@ -9,6 +9,7 @@ Features include:
 - Cache and counter actions
 - Cache adapter:
   - PHP
+  - APC
 
 Documentation
 -------------
