@@ -10,6 +10,7 @@ Features include:
 - Cache adapter:
   - PHP
   - APC
+  - Redis (with PRedis)
 
 Documentation
 -------------

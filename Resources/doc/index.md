@@ -15,6 +15,14 @@ $ php composer.phar require sonatra/cache
 
 If you want to use APC cache, you must install the APC PHP Extension.
 
+##### Redis
+
+If you want to use Redis cache, you must install this dependency:
+
+``` bash
+$ php composer.phar require 'predis/predis:0.8'
+```
+
 ## Configuration
 
 ##### APC

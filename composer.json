@@ -18,10 +18,12 @@
     "require-dev": {
         "psr/log": "~1.0",
         "symfony/filesystem": "~2.1",
-        "symfony/finder": "~2.1"
+        "symfony/finder": "~2.1",
+        "predis/predis": "0.8.*"
     },
     "suggest": {
-        "ext-apc": "Caching with ext/apc"
+        "ext-apc": "Caching with ext/apc",
+        "predis/predis": "Install Redis PHP"
     },
     "autoload": {
         "psr-4": {
