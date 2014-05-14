@@ -14,7 +14,7 @@ namespace Sonatra\Component\Cache\Tests\Adapter;
 use Sonatra\Component\Cache\Adapter\ApcCache;
 
 /**
- * PHP Cache Tests Suite.
+ * APC Cache Tests Suite.
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
