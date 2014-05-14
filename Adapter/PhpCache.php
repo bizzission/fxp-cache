@@ -70,8 +70,11 @@ class PhpCache extends AbstractCache
 
         if ($this->filesystem->exists($file)) {
             $data = include $file;
+            $element = new CacheElement($key, unserialize($data['data']), $data['ttl'], new \DateTime('@' . $data['createdAt']));
 
-            return new CacheElement($key, $data['data'], $data['ttl'], new \DateTime('@' . $data['createdAt']));
+            if (!$element->isExpired()) {
+                return $element;
+            }
         }
 
         return $this->createInvalidElement($key);

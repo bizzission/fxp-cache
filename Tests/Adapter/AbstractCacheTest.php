@@ -114,7 +114,7 @@ abstract class AbstractCacheTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Sonatra\Component\Cache\CacheElement', $cacheElement);
         $this->assertTrue($cacheElement->isExpired());
-        $this->assertNotNull($cacheElement->getData());
+        $this->assertNull($cacheElement->getData());
     }
 
     public function testCounter()
@@ -132,6 +132,11 @@ abstract class AbstractCacheTest extends \PHPUnit_Framework_TestCase
         $counter = $cache->increment($counter);
         $this->assertEquals(2, $counter->getValue());
 
+        // check value stocked in cache
+        $counter = $cache->getCounter($counter->getName());
+        $this->assertEquals(2, $counter->getValue());
+
+        // increment next
         $counter = $cache->increment($counter, 3);
         $this->assertEquals(5, $counter->getValue());
 
@@ -143,6 +148,11 @@ abstract class AbstractCacheTest extends \PHPUnit_Framework_TestCase
         $counter = $cache->decrement($counter);
         $this->assertEquals(4, $counter->getValue());
 
+        // check value stocked in cache
+        $counter = $cache->getCounter($counter->getName());
+        $this->assertEquals(4, $counter->getValue());
+
+        // decrement next
         $counter = $cache->decrement($counter, 3);
         $this->assertEquals(1, $counter->getValue());
 

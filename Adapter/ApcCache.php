@@ -55,10 +55,15 @@ class ApcCache extends AbstractCache
      */
     public function get($key)
     {
-        $key = $this->getCacheKey($key);
+        $keyPrefixed = $this->getCacheKey($key);
 
-        if (apc_exists($key)) {
-            return apc_fetch($key);
+        if (apc_exists($keyPrefixed)) {
+            /* @var CacheElement $element */
+            $element = apc_fetch($keyPrefixed);
+
+            if ($element instanceof CacheElement && !$element->isExpired()) {
+                return $element;
+            }
         }
 
         return $this->createInvalidElement($key);
