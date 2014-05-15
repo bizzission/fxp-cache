@@ -29,6 +29,17 @@ $cache = ApcCache('my_custom_prefix');
 //...
 ```
 
+### Redis Cache initialisation
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\RedisCache;
+
+$cache = RedisCache('my_custom_prefix');
+//...
+```
+
 ## Examples of Use
 
 ### Cache usage
