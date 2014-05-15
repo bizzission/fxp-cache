@@ -15,6 +15,10 @@ $ php composer.phar require sonatra/cache
 
 If you want to use APC cache, you must install the APC PHP Extension.
 
+##### Memcached
+
+If you want to use Memcached cache, you must install the Memcache PHP Extension.
+
 ##### Redis
 
 If you want to use Redis cache, you must install this dependency:

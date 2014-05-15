@@ -29,6 +29,27 @@ $cache = ApcCache('my_custom_prefix');
 //...
 ```
 
+### Memcached Cache initialisation
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\MemcachedCache;
+
+$server = array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 0);//host required
+$cache = MemcachedCache('my_custom_prefix', $server);
+
+or
+
+$servers = array(
+    array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 2),
+    array('host' => '127.0.0.2', 'port' => 11211, 'weight' => 1),
+    array('host' => '127.0.0.3', 'port' => 11211, 'weight' => 0),
+);
+$cache = MemcachedCache('my_custom_prefix', $servers);
+//...
+```
+
 ### Redis Cache initialisation
 
 ```php
