@@ -28,6 +28,11 @@ class RedisCache extends AbstractCache
     protected $client;
 
     /**
+     * @var string
+     */
+    protected $prefix;
+
+    /**
      * Constructor.
      *
      * @param string $prefix     A prefix to avoid clash between instances
@@ -36,9 +41,10 @@ class RedisCache extends AbstractCache
      */
     public function __construct($prefix, array $parameters = array(), array $options = array())
     {
-        $options = array_replace(array('prefix', $prefix), $options);
+        $options = array_replace(array('prefix' => $prefix), $options);
 
         $this->client =  new Client($parameters, $options);
+        $this->prefix = $prefix;
     }
 
     /**
@@ -118,6 +124,7 @@ class RedisCache extends AbstractCache
         $list = $this->client->executeCommand($cmd);
 
         foreach ($list as $item) {
+            $item = substr($item, strlen($this->prefix));
             $res = $this->flush($item);
             $success = !$res && $success ? false : $success;
         }
