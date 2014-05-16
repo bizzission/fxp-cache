@@ -33,6 +33,10 @@ $ php composer.phar require 'predis/predis:0.8'
 
 The APC PHP Extension must be enabled in `php.ini`
 
+##### Memcached
+
+The Memcached PHP Extension must be enabled in `php.ini`
+
 ### Next Steps
 
 Now that you have completed the basic installation of the Sonatra Cache,
