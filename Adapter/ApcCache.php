@@ -95,8 +95,9 @@ class ApcCache extends AbstractCache
 
         foreach ($info['cache_list'] as $item) {
             $key = $item['key'];
+            $fPrefix = sprintf('%s%s', $this->prefix, $prefix);
 
-            if (null === $prefix || 0 === strpos($key, $this->prefix . $prefix)) {
+            if (0 === strpos($key, $fPrefix)) {
                 $res = apc_delete($key);
                 $success = !$res && $success ? false : $success;
             }

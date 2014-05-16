@@ -113,7 +113,7 @@ class MemcachedCache extends AbstractCache
      */
     public function flushAll($prefix = null)
     {
-        if (null === $prefix) {
+        if (null === $prefix && (null == $this->prefix || '' === $this->prefix)) {
             return $this->client->flush();
         }
 
@@ -121,7 +121,9 @@ class MemcachedCache extends AbstractCache
         $list = $this->client->getAllKeys();
 
         foreach ($list as $keyPrefixed) {
-            if (0 === strpos($keyPrefixed, $this->prefix . $prefix)) {
+            $fPrefix = sprintf('%s%s', $this->prefix, $prefix);
+
+            if (0 === strpos($keyPrefixed, $fPrefix)) {
                 $res = $this->client->delete($keyPrefixed);
                 $success = !$res && $success ? false : $success;
             }
