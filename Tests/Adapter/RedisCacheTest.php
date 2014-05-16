@@ -23,9 +23,9 @@ class RedisCacheTest extends AbstractCacheTest
     /**
      * {@inheritdoc}
      */
-    public function getCache()
+    public function getCache($prefix = null)
     {
-        return new RedisCache('prefix_', array(
+        return new RedisCache($prefix, array(
             'host'     => '127.0.0.1',
             'port'     => 6379,
             'database' => 42
@@ -35,9 +35,9 @@ class RedisCacheTest extends AbstractCacheTest
     /**
      * {@inheritdoc}
      */
-    public function getMockCache()
+    public function getMockCache($prefix = null)
     {
-        return $this->getCache();
+        return $this->getCache($prefix);
     }
 
     /**

@@ -23,17 +23,17 @@ class ApcCacheTest extends AbstractCacheTest
     /**
      * {@inheritdoc}
      */
-    public function getCache()
+    public function getCache($prefix = null)
     {
-        return new ApcCache('prefix_');
+        return new ApcCache($prefix);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getMockCache()
+    public function getMockCache($prefix = null)
     {
-        return $this->getCache();
+        return $this->getCache($prefix);
     }
 
     /**

@@ -25,15 +25,15 @@ class PhpCacheTest extends AbstractCacheTest
     /**
      * {@inheritdoc}
      */
-    public function getCache()
+    public function getCache($prefix = null)
     {
-        return new PhpCache(self::getDir(), 'prefix_', new Filesystem());
+        return new PhpCache(self::getDir(), $prefix, new Filesystem());
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getMockCache()
+    public function getMockCache($prefix = null)
     {
         $fs = $this->getMock('Symfony\Component\Filesystem\Filesystem');
 
@@ -43,7 +43,7 @@ class PhpCacheTest extends AbstractCacheTest
 
         /* @var Filesystem $fs */
 
-        return new PhpCache(self::getDir(), 'prefix_', $fs);
+        return new PhpCache(self::getDir(), $prefix, $fs);
     }
 
     /**

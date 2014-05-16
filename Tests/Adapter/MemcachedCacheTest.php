@@ -23,9 +23,9 @@ class MemcachedCacheTest extends AbstractCacheTest
     /**
      * {@inheritdoc}
      */
-    public function getCache()
+    public function getCache($prefix = null)
     {
-        return new MemcachedCache('prefix_', array(array(
+        return new MemcachedCache($prefix, array(array(
             'host'   => '127.0.0.1',
             'port'   => 11211,
             'weight' => 0
@@ -35,9 +35,9 @@ class MemcachedCacheTest extends AbstractCacheTest
     /**
      * {@inheritdoc}
      */
-    public function getMockCache()
+    public function getMockCache($prefix = null)
     {
-        return $this->getCache();
+        return $this->getCache($prefix);
     }
 
     /**
