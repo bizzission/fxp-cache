@@ -6,6 +6,7 @@ The Sonatra Cache is a small library for manage the different system of cache.
 Features include:
 
 - Namepsace allowed
+- Flush only all keys with a prefix
 - Cache and counter actions
 - Cache adapter:
   - PHP
@@ -36,7 +37,7 @@ This bundle is under the MIT license. See the complete license in the bundle:
 About
 -----
 
-Sonatra AjaxBundle is a [sonatra](https://github.com/sonatra) initiative.
+Sonatra Cache is a [sonatra](https://github.com/sonatra) initiative.
 See also the list of [contributors](https://github.com/sonatra/cache/contributors).
 
 Reporting an issue or a feature request
