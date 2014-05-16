@@ -27,7 +27,7 @@ class PhpCacheTest extends AbstractCacheTest
      */
     public function getCache()
     {
-        return new PhpCache(self::getDir(), new Filesystem());
+        return new PhpCache(self::getDir(), 'prefix_', new Filesystem());
     }
 
     /**
@@ -43,7 +43,7 @@ class PhpCacheTest extends AbstractCacheTest
 
         /* @var Filesystem $fs */
 
-        return new PhpCache(self::getDir(), $fs);
+        return new PhpCache(self::getDir(), 'prefix_', $fs);
     }
 
     /**

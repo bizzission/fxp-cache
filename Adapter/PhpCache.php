@@ -30,6 +30,11 @@ class PhpCache extends AbstractCache
     protected $path;
 
     /**
+     * @var string
+     */
+    protected $prefix;
+
+    /**
      * @var Filesystem
      */
     protected $filesystem;
@@ -37,12 +42,14 @@ class PhpCache extends AbstractCache
     /**
      * Constructor.
      *
-     * @param string     $path
-     * @param Filesystem $filesystem
+     * @param string     $path       The cache path
+     * @param string     $prefix     A prefix to avoid clash between instances
+     * @param Filesystem $filesystem The file system instance
      */
-    public function __construct($path, Filesystem $filesystem = null)
+    public function __construct($path, $prefix, Filesystem $filesystem = null)
     {
         $this->path = $path;
+        $this->prefix = $prefix;
         $this->filesystem = null !== $filesystem ? $filesystem : new Filesystem();
     }
 
@@ -56,7 +63,7 @@ class PhpCache extends AbstractCache
         $mode = 0666 & ~umask();
         $element = new CacheElement($key, $value, $ttl, $createAt);
 
-        $this->filesystem->dumpFile($this->getFilename($key), $content, $mode);
+        $this->filesystem->dumpFile($this->getCacheKey($key), $content, $mode);
 
         return $element;
     }
@@ -66,7 +73,7 @@ class PhpCache extends AbstractCache
      */
     public function get($key)
     {
-        $file = $this->getFilename($key);
+        $file = $this->getCacheKey($key);
 
         if ($this->filesystem->exists($file)) {
             $data = include $file;
@@ -85,7 +92,7 @@ class PhpCache extends AbstractCache
      */
     public function has($key)
     {
-        return $this->filesystem->exists($this->getFilename($key));
+        return $this->filesystem->exists($this->getCacheKey($key));
     }
 
     /**
@@ -94,7 +101,7 @@ class PhpCache extends AbstractCache
     public function flush($key)
     {
         try {
-            $this->filesystem->remove($this->getFilename($key));
+            $this->filesystem->remove($this->getCacheKey($key));
 
         } catch (IOException $e) {
             return false;
@@ -110,7 +117,7 @@ class PhpCache extends AbstractCache
     {
         $success = true;
         $finder = new Finder();
-        $finder->files()->in($this->path);
+        $finder->files()->in($this->getCachePath());
 
         /* @var \SplFileInfo $file */
         foreach ($finder as $file) {
@@ -130,7 +137,7 @@ class PhpCache extends AbstractCache
      */
     public function setCounter(Counter $counter)
     {
-        $file = $this->getCounterFilename($counter->getName());
+        $file = $this->getCacheKey($counter->getName());
         $this->filesystem->mkdir(dirname($file));
 
         file_put_contents($file, $counter->getValue());
@@ -143,7 +150,7 @@ class PhpCache extends AbstractCache
      */
     public function getCounter($counter)
     {
-        $file = $this->getCounterFilename($counter);
+        $file = $this->getCacheKey($counter);
         $value = 0;
 
         if (file_exists($file)) {
@@ -154,26 +161,26 @@ class PhpCache extends AbstractCache
     }
 
     /**
-     * Gets the filename of cache key.
+     * Gets the cache path.
+     *
+     * @return string
+     */
+    protected function getCachePath()
+    {
+        $prefix = null === $this->prefix ? '' : sprintf('/%s', $this->prefix);
+
+        return sprintf('%s%s', $this->path, $prefix);
+    }
+
+    /**
+     * Gets the cache key.
      *
      * @param string $key The cache key
      *
      * @return string
      */
-    protected function getFilename($key)
+    protected function getCacheKey($key)
     {
-        return sprintf('%s/cache/%s.php', $this->path, $key);
-    }
-
-    /**
-     * Gets the filename of cache counter key.
-     *
-     * @param string $key The cache counter key
-     *
-     * @return string
-     */
-    protected function getCounterFilename($key)
-    {
-        return sprintf('%s/counter/%s.php', $this->path, $key);
+        return sprintf('%s/%s.php', $this->getCachePath(), $key);
     }
 }
