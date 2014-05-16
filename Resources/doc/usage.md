@@ -14,7 +14,7 @@ Sonatra Cache Usage
 
 use Sonatra\Component\Cache\Adapter\PhpCache;
 
-$cache = PhpCache('var/cache');
+$cache = PhpCache('var/cache', 'my_custom_prefix');
 //...
 ```
 
@@ -57,7 +57,8 @@ $cache = MemcachedCache('my_custom_prefix', $servers);
 
 use Sonatra\Component\Cache\Adapter\RedisCache;
 
-$cache = RedisCache('my_custom_prefix');
+$server = array('host' => '127.0.0.1', 'port' => 6379, 'database' => 42);
+$cache = RedisCache('my_custom_prefix', $server);
 //...
 ```
 
@@ -65,29 +66,128 @@ $cache = RedisCache('my_custom_prefix');
 
 ### Cache usage
 
+##### Cache: Set
+
 ```php
 <?php
 
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\CacheElement;
 
-$cache = PhpCache('var/cache', new Symfony\Component\Filesystem\Filesystem());
+$cache = PhpCache(sys_get_temp_dir() . '/project_42', 'my_custom_prefix');
+
+/* @var CacheElement $cacheElement */
+$cacheElement = $cache->set('foo', 'bar', CacheElement::MONTH);
+```
+
+##### Cache: Has
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\PhpCache;
+use Sonatra\Component\Cache\CacheElement;
+
+$cache = PhpCache(sys_get_temp_dir() . '/project_42', 'my_custom_prefix');
+
+$cache->has('foo');// will return false
 
 $cache->set('foo', 'bar', CacheElement::MONTH);
 
-// set
-$cacheElement = $cache->set('foo', 'bar', CacheElement::DAY);
+$cache->has('foo');// will return true
+```
 
-// has
+##### Cache: Get
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\PhpCache;
+use Sonatra\Component\Cache\CacheElement;
+
+$cache = PhpCache(sys_get_temp_dir() . '/project_42', 'my_custom_prefix');
+
+/* @var CacheElement $cacheElement */
+$element = $cache->get('foo');
+
+$element->isExpired(); // will return true
+$element->getData(); // will return null
+
+$cache->set('foo', 'bar', CacheElement::MONTH);
+
+$element->isExpired(); // will return false
+$element->getData(); // will return 'bar'
+```
+
+##### Cache: Flush
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\PhpCache;
+use Sonatra\Component\Cache\CacheElement;
+
+$cache = PhpCache(sys_get_temp_dir() . '/project_42', 'my_custom_prefix');
+
+$cache->set('foo', 'bar', CacheElement::MONTH);
 $cache->has('foo');// will return true
 
-// get
-$cacheElement = $cache->get('foo');// will return CacheElement instance
+$cache->flush('foo'); // will return true
+$cache->has('foo');// will return false
+```
 
-$cacheElement->getData();// will return 'bar'
+##### Cache: Flush All
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\PhpCache;
+use Sonatra\Component\Cache\CacheElement;
+
+$cache = PhpCache(sys_get_temp_dir() . '/project_42', 'my_custom_prefix');
+
+$cache->set('foo', 'bar', CacheElement::MONTH);
+$cache->set('bar', 'foo', CacheElement::MONTH);
+
+$cache->has('foo');// will return true
+$cache->has('bar');// will return true
+
+$cache->flushAll(); // will return true
+$cache->has('foo');// will return false
+$cache->has('bar');// will return false
+```
+
+##### Cache: Flush All prefixed keys
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\PhpCache;
+use Sonatra\Component\Cache\CacheElement;
+
+$cache = PhpCache(sys_get_temp_dir() . '/project_42', 'my_custom_prefix');
+
+$cache->set('foo', 'bar', CacheElement::MONTH);
+$cache->set('bar', 'foo', CacheElement::MONTH);
+$cache->set('prefix_foo', 'bar', CacheElement::MONTH);
+$cache->set('prefix_bar', 'foo', CacheElement::MONTH);
+
+
+$cache->has('foo');// will return true
+$cache->has('bar');// will return true
+$cache->has('prefix_foo');// will return true
+$cache->has('prefix_bar');// will return true
+
+$cache->flushAll('prefix_'); // will return true
+$cache->has('foo');// will return true
+$cache->has('bar');// will return true
+$cache->has('prefix_foo');// will return false
+$cache->has('prefix_bar');// will return false
 ```
 
 ### Counter usage
+
+##### Counter: Set
 
 ```php
 <?php
@@ -95,24 +195,71 @@ $cacheElement->getData();// will return 'bar'
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\Counter;
 
-$cache = PhpCache('var/cache', new Symfony\Component\Filesystem\Filesystem());
+$cache = PhpCache(sys_get_temp_dir() . '/project_42', 'my_custom_prefix');
 
 /* @var Counter $counter */
-// increment
-$counter = $cache->increment('foobar');
+$counter = new Counter('foo_counter', 42);
+counter = $cache->setCounter($counter);// will return Counter saved in cache
+```
 
-$counter->getValue(); // will return 1 if the counter is new
+##### Counter: Get
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\PhpCache;
+use Sonatra\Component\Cache\Counter;
+
+$cache = PhpCache(sys_get_temp_dir() . '/project_42', 'my_custom_prefix');
+
+/* @var Counter $counter */
+$counter = $cache->getCounter('foo_counter');
+$counter->getValue(); // will return 0 because counter does not exist in cache
+
+$counter = new Counter('foo_counter', 42);
+$counter = $cache->setCounter($counter);
+
+$counter = $cache->getCounter('foo_counter');
+$counter->getValue(); // will return 42
+```
+
+##### Counter: Increment
+
+```php
+<?php
+
+use Sonatra\Component\Cache\Adapter\PhpCache;
+use Sonatra\Component\Cache\Counter;
+
+$cache = PhpCache(sys_get_temp_dir() . '/project_42', 'my_custom_prefix');
+
+/* @var Counter $counter */
+$counter = $cache->increment('foo_counter');
+$counter->getValue(); // will return 1 because counter des not exist and it's incremented by 1
 
 $counter = $cache->increment($counter, 4);
-
 $counter->getValue(); // will return 5
 
-// decrement
-$counter = $cache->decrement('foobar');
+$counter = $cache->increment('foo_counter', 5);
+$counter->getValue(); // will return 10
+```
 
-$counter->getValue(); // will return 4
+##### Counter: Decrement
 
-$counter = $cache->decrement($counter, 4);
+```php
+<?php
 
-$counter->getValue(); // will return 0
+use Sonatra\Component\Cache\Adapter\PhpCache;
+use Sonatra\Component\Cache\Counter;
+
+$cache = PhpCache(sys_get_temp_dir() . '/project_42', 'my_custom_prefix');
+
+/* @var Counter $counter */
+$counter = new Counter('foo_counter', 42);
+
+$counter = $cache->decrement($counter);
+$counter->getValue(); // will return 41
+
+$counter = $cache->decrement('foo_counter', 40);
+$counter->getValue(); // will return 1
 ```
