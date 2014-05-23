@@ -1,17 +1,11 @@
-Sonatra Cache Usage
-===================
-
-## Prerequisites
-
-[Installation and Configuration](index.md)
+Usage
+=====
 
 ## Initialisations
 
 ### PHP Cache initialisation
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 
 $cache = PhpCache('var/cache', 'my_custom_prefix');
@@ -21,8 +15,6 @@ $cache = PhpCache('var/cache', 'my_custom_prefix');
 ### APC Cache initialisation
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\ApcCache;
 
 $cache = ApcCache('my_custom_prefix');
@@ -32,14 +24,12 @@ $cache = ApcCache('my_custom_prefix');
 ### Memcached Cache initialisation
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\MemcachedCache;
 
 $server = array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 0);//host required
 $cache = MemcachedCache('my_custom_prefix', $server);
 
-or
+// or
 
 $servers = array(
     array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 2),
@@ -53,8 +43,6 @@ $cache = MemcachedCache('my_custom_prefix', $servers);
 ### Redis Cache initialisation
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\RedisCache;
 
 $server = array('host' => '127.0.0.1', 'port' => 6379, 'database' => 42);
@@ -69,8 +57,6 @@ $cache = RedisCache('my_custom_prefix', $server);
 ##### Cache: Set
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\CacheElement;
 
@@ -83,8 +69,6 @@ $cacheElement = $cache->set('foo', 'bar', CacheElement::MONTH);
 ##### Cache: Has
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\CacheElement;
 
@@ -100,8 +84,6 @@ $cache->has('foo');// will return true
 ##### Cache: Get
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\CacheElement;
 
@@ -122,8 +104,6 @@ $element->getData(); // will return 'bar'
 ##### Cache: Flush
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\CacheElement;
 
@@ -139,8 +119,6 @@ $cache->has('foo');// will return false
 ##### Cache: Flush All
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\CacheElement;
 
@@ -160,8 +138,6 @@ $cache->has('bar');// will return false
 ##### Cache: Flush All prefixed keys
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\CacheElement;
 
@@ -190,8 +166,6 @@ $cache->has('prefix_bar');// will return false
 ##### Counter: Set
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\Counter;
 
@@ -205,8 +179,6 @@ counter = $cache->setCounter($counter);// will return Counter saved in cache
 ##### Counter: Get
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\Counter;
 
@@ -226,8 +198,6 @@ $counter->getValue(); // will return 42
 ##### Counter: Increment
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\Counter;
 
@@ -247,8 +217,6 @@ $counter->getValue(); // will return 10
 ##### Counter: Decrement
 
 ```php
-<?php
-
 use Sonatra\Component\Cache\Adapter\PhpCache;
 use Sonatra\Component\Cache\Counter;
 

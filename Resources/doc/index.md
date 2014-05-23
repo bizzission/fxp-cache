@@ -1,5 +1,5 @@
-Sonatra Cache
-=============
+Getting Started
+===============
 
 ## Prerequisites
 
@@ -11,15 +11,15 @@ This version of the library requires not dependence.
 $ php composer.phar require sonatra/cache
 ```
 
-##### APC
+#### APC
 
 If you want to use APC cache, you must install the APC PHP Extension.
 
-##### Memcached
+#### Memcached
 
 If you want to use Memcached cache, you must install the Memcache PHP Extension.
 
-##### Redis
+#### Redis
 
 If you want to use Redis cache, you must install this dependency:
 
@@ -29,11 +29,11 @@ $ php composer.phar require 'predis/predis:0.8'
 
 ## Configuration
 
-##### APC
+#### APC
 
 The APC PHP Extension must be enabled in `php.ini`
 
-##### Memcached
+#### Memcached
 
 The Memcached PHP Extension must be enabled in `php.ini`
 
