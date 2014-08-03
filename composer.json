@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Sonatra Cache Component",
     "keywords": ["cache", "redis", "memcache", "memcached", "apc"],
-    "homepage": "http://sonatra.com",
+    "homepage": "https://github.com/sonatra/sonatra-cache",
     "license": "MIT",
     "authors": [
         {
@@ -11,24 +11,22 @@
             "email": "francois.pluchino@sonatra.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3"
     },
     "require-dev": {
-        "psr/log": "~1.0",
-        "symfony/filesystem": "~2.1",
-        "symfony/finder": "~2.1",
-        "predis/predis": "0.8.*"
+        "psr/log": "1.0",
+        "symfony/filesystem": "~2.4",
+        "symfony/finder": "~2.4",
+        "predis/predis": "1.0.*"
     },
     "suggest": {
         "ext-apc": "Caching with ext/apc",
+        "ext-memcached": "Caching with ext/memcached",
         "predis/predis": "Install Redis PHP"
     },
     "autoload": {
-        "psr-4": {
-            "Sonatra\\Component\\Cache\\": ""
-        }
+        "psr-4": { "Sonatra\\Component\\Cache\\": "" }
     },
     "extra": {
         "branch-alias": {
