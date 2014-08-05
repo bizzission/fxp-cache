@@ -1,6 +1,9 @@
 Sonatra Cache
 =============
 
+[![Latest Stable Version](https://poser.pugx.org/sonatra/cache/v/stable.svg)](https://packagist.org/packages/sonatra/cache)
+[![Latest Unstable Version](https://poser.pugx.org/sonatra/cache/v/unstable.svg)](https://packagist.org/packages/sonatra/cache)
+
 The Sonatra Cache is a small library for manage the different system of cache.
 
 Features include:
