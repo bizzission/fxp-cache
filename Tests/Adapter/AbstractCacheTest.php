@@ -26,6 +26,11 @@ abstract class AbstractCacheTest extends \PHPUnit_Framework_TestCase
     const PREFIX2 = 'global_prefix2_';
 
     /**
+     * @var bool
+     */
+    protected $testSkipped = false;
+
+    /**
      * Gets the cache.
      *
      * @param string $prefix

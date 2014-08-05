@@ -46,6 +46,7 @@ class RedisCacheTest extends AbstractCacheTest
     public function setUp()
     {
         if (!class_exists('\Predis\Client', true)) {
+            $this->testSkipped = true;
             $this->markTestSkipped('Predis is not installed');
         }
 
@@ -56,6 +57,7 @@ class RedisCacheTest extends AbstractCacheTest
         $result = @socket_connect($socket, '127.0.0.1', 6379);
 
         if (!$result) {
+            $this->testSkipped = true;
             $this->markTestSkipped('Redis is not running');
         }
 
@@ -70,6 +72,10 @@ class RedisCacheTest extends AbstractCacheTest
      */
     public function tearDown()
     {
+        if ($this->testSkipped) {
+            return;
+        }
+
         $client = $this->getCache()->getClient();
         $client->executeCommand($client->createCommand('flushdb'));
     }

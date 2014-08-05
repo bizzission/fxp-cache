@@ -46,6 +46,7 @@ class MemcachedCacheTest extends AbstractCacheTest
     public function setUp()
     {
         if (!class_exists('Memcached', true)) {
+            $this->testSkipped = true;
             $this->markTestSkipped('Memcached is not installed');
         }
 
@@ -55,6 +56,7 @@ class MemcachedCacheTest extends AbstractCacheTest
         socket_close($socket);
 
         if (!$result) {
+            $this->testSkipped = true;
             $this->markTestSkipped('Memcached is not running');
         }
 
@@ -69,7 +71,7 @@ class MemcachedCacheTest extends AbstractCacheTest
      */
     public function tearDown()
     {
-        if (!class_exists('Memcached', true)) {
+        if ($this->testSkipped) {
             return;
         }
 

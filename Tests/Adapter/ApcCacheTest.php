@@ -42,10 +42,12 @@ class ApcCacheTest extends AbstractCacheTest
     public function setUp()
     {
         if (!function_exists('apc_store')) {
+            $this->testSkipped = true;
             $this->markTestSkipped('APC is not installed');
         }
 
         if (ini_get('apc.enable_cli') == 0) {
+            $this->testSkipped = true;
             $this->markTestSkipped('APC is not enabled in cli, please add apc.enable_cli=On into the php.ini file');
         }
 
@@ -57,6 +59,10 @@ class ApcCacheTest extends AbstractCacheTest
      */
     public function tearDown()
     {
+        if ($this->testSkipped) {
+            return;
+        }
+
         apc_clear_cache();
     }
 }
