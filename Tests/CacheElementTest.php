@@ -35,7 +35,8 @@ class CacheElementTest extends \PHPUnit_Framework_TestCase
 
     public function testExpiredCacheElement()
     {
-        $element = new CacheElement('foo', 'bar', 0, (new \DateTime())->sub(new \DateInterval('PT1S')));
+        $now = new \DateTime();
+        $element = new CacheElement('foo', 'bar', 0, $now->sub(new \DateInterval('PT1S')));
 
         $this->assertTrue($element->isExpired());
         $this->assertEquals(new \DateTime(), $element->getExpirationDate());
