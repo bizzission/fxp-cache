@@ -3,6 +3,7 @@ Sonatra Cache
 
 [![Latest Stable Version](https://poser.pugx.org/sonatra/cache/v/stable.svg)](https://packagist.org/packages/sonatra/cache)
 [![Latest Unstable Version](https://poser.pugx.org/sonatra/cache/v/unstable.svg)](https://packagist.org/packages/sonatra/cache)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sonatra/sonatra-cache/badges/quality-score.png)](https://scrutinizer-ci.com/g/sonatra/sonatra-cache)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/98e1fc05-ffc4-4cbe-b8a2-0836264e7f09/mini.png)](https://insight.sensiolabs.com/projects/98e1fc05-ffc4-4cbe-b8a2-0836264e7f09)
 
 The Sonatra Cache is a small library for manage the different system of cache.
