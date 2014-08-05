@@ -72,6 +72,8 @@ abstract class AbstractCache implements CacheInterface
      */
     protected function createInvalidElement($key)
     {
-        return new CacheElement($key, null, 0, (new \DateTime())->sub(new \DateInterval('PT1S')));
+        $now = new \DateTime();
+
+        return new CacheElement($key, null, 0, $now->sub(new \DateInterval('PT1S')));
     }
 }
