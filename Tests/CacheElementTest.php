@@ -22,7 +22,8 @@ class CacheElementTest extends \PHPUnit_Framework_TestCase
 {
     public function testCacheElement()
     {
-        $expirationDateProvided = (new \DateTime())->add(new \DateInterval(sprintf('PT%sS', CacheElement::SECOND)));
+        $now = new \DateTime();
+        $expirationDateProvided = $now->add(new \DateInterval(sprintf('PT%sS', CacheElement::SECOND)));
         $element = new CacheElement('foo', 'bar', CacheElement::SECOND);
 
         $this->assertEquals('foo', $element->getKey());
