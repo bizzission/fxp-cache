@@ -91,10 +91,10 @@ class ApcCache extends AbstractCache
     public function flushAll($prefix = null)
     {
         $success = true;
-        $info = apc_cache_info();
+        $info = apc_cache_info('user');
 
         foreach ($info['cache_list'] as $item) {
-            $key = $item['key'];
+            $key = isset($item['key']) ? $item['key'] : $item['info'];
             $fPrefix = sprintf('%s%s', $this->prefix, $prefix);
 
             if ('' === $fPrefix || 0 === strpos($key, $fPrefix)) {

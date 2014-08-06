@@ -51,7 +51,7 @@ class ApcCacheTest extends AbstractCacheTest
             $this->markTestSkipped('APC is not enabled in cli, please add apc.enable_cli=On into the php.ini file');
         }
 
-        apc_clear_cache();
+        apc_clear_cache('user');
     }
 
     /**
@@ -63,6 +63,7 @@ class ApcCacheTest extends AbstractCacheTest
             return;
         }
 
-        apc_clear_cache();
+        apc_clear_cache('user');
+
     }
 }
