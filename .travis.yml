@@ -12,11 +12,18 @@ matrix:
     allow_failures:
         - php: hhvm
 
+services:
+  - memcached
+  - redis-server
+
 before_script:
+    - echo "extension=memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo "extension=apc.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - composer self-update
     - composer install
     - composer require --dev --no-update phpunit/phpunit:@stable phpunit/php-code-coverage:@dev satooshi/php-coveralls:@dev
     - composer update phpunit/php-code-coverage satooshi/php-coveralls
+    - echo "apc.enable_cli=On" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - mkdir -p ./build/logs
 
 script:
