@@ -94,4 +94,15 @@ class MemcachedCacheTest extends AbstractCacheTest
 
         $memcached->flush();
     }
+
+    public function testInitWithOnlyOneServer()
+    {
+        $cache = new MemcachedCache('global_prefix_', array(
+            'host'   => '127.0.0.1',
+            'port'   => 11211,
+            'weight' => 0
+        ));
+
+        $this->assertCount(1, $cache->getClient()->getServerList());
+    }
 }
