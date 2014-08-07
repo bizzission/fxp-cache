@@ -70,7 +70,7 @@ class MemcachedCache extends AbstractCache
         $createAt = new \DateTime();
         $element = new CacheElement($key, $value, $ttl, $createAt);
 
-        $this->client->add($key, $element, $ttl);
+        $this->client->set($key, $element, $ttl);
 
         return $element;
     }
@@ -139,7 +139,7 @@ class MemcachedCache extends AbstractCache
     {
         $key = $this->getCacheKey($counter->getName());
 
-        $this->client->add($key, $counter->getValue());
+        $this->client->set($key, $counter->getValue());
 
         return $counter;
     }
@@ -168,9 +168,14 @@ class MemcachedCache extends AbstractCache
         $counter = $this->transformCounter($counter);
         $key = $this->getCacheKey($counter->getName());
 
-        $value = (int) $this->client->increment($key, $value);
+        $res = $this->client->increment($key, $value);
 
-        return new Counter($counter->getName(), $value);
+        if (false === $res) {
+            $this->client->set($key, $value);
+            $res = $value;
+        }
+
+        return new Counter($counter->getName(), $res);
     }
 
     /**
@@ -181,9 +186,14 @@ class MemcachedCache extends AbstractCache
         $counter = $this->transformCounter($counter);
         $key = $this->getCacheKey($counter->getName());
 
-        $value = (int) $this->client->decrement($key, $value);
+        $res = $this->client->decrement($key, $value);
 
-        return new Counter($counter->getName(), $value);
+        if (false === $res) {
+            $this->client->set($key, -$value);
+            $res = -$value;
+        }
+
+        return new Counter($counter->getName(), $res);
     }
 
     /**
