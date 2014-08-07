@@ -45,6 +45,11 @@ class MemcachedCacheTest extends AbstractCacheTest
      */
     public function setUp()
     {
+        if (PHP_VERSION_ID <= 50303) {
+            $this->testSkipped = true;
+            $this->markTestSkipped('The PHP version must be greater than 5.3.3 (because DateInterval is buggy)');
+        }
+
         if (!class_exists('Memcached', true)) {
             $this->testSkipped = true;
             $this->markTestSkipped('Memcached is not installed');
