@@ -24,6 +24,7 @@ abstract class AbstractCacheTest extends \PHPUnit_Framework_TestCase
 {
     const PREFIX1 = 'global_prefix1_';
     const PREFIX2 = 'global_prefix2_';
+    const PREFIX_NULL = null;
 
     /**
      * @var bool
@@ -129,6 +130,26 @@ abstract class AbstractCacheTest extends \PHPUnit_Framework_TestCase
     {
         $cache1 = $this->getCache(self::PREFIX1);
         $cache2 = $this->getCache(self::PREFIX2);
+
+        $cache1->set('foo', 'bar', CacheElement::SECOND);
+        $cache1->set('bar', 'foo', CacheElement::SECOND);
+        $cache2->set('foo', 'bar', CacheElement::SECOND);
+        $cache2->set('bar', 'foo', CacheElement::SECOND);
+
+        $this->assertTrue($cache1->flushAll());
+        $this->assertTrue($cache2->flushAll());
+
+        $this->assertFalse($cache1->has('foo'));
+        $this->assertFalse($cache2->has('foo'));
+
+        $this->assertFalse($cache1->has('bar'));
+        $this->assertFalse($cache2->has('bar'));
+    }
+
+    public function testFlushAllWithoutPrefixAndGlobalPrefix()
+    {
+        $cache1 = $this->getCache(self::PREFIX_NULL);
+        $cache2 = $this->getCache(self::PREFIX_NULL);
 
         $cache1->set('foo', 'bar', CacheElement::SECOND);
         $cache1->set('bar', 'foo', CacheElement::SECOND);
@@ -302,11 +323,15 @@ abstract class AbstractCacheTest extends \PHPUnit_Framework_TestCase
         $cache1 = $this->getCache(self::PREFIX1);
         $cache2 = $this->getCache(self::PREFIX2);
 
-        $counter1 = $cache1->increment('number');
-        $counter2 = $cache2->increment('number');
+        $counter1 = $cache1->increment('number_inc');
+        $counter2 = $cache2->increment('number_inc');
+        $counter3 = $cache1->decrement('number_dec');
+        $counter4 = $cache2->decrement('number_dec');
 
         $this->assertEquals(1, $counter1->getValue());
         $this->assertEquals(1, $counter2->getValue());
+        $this->assertEquals(-1, $counter3->getValue());
+        $this->assertEquals(-1, $counter4->getValue());
     }
 
     public function testNonExistantCounter()
