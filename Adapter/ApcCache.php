@@ -94,13 +94,8 @@ class ApcCache extends AbstractCache
         $info = apc_cache_info('user');
 
         foreach ($info['cache_list'] as $item) {
-            $key = isset($item['key']) ? $item['key'] : $item['info'];
-            $fPrefix = sprintf('%s%s', $this->prefix, $prefix);
-
-            if ('' === $fPrefix || 0 === strpos($key, $fPrefix)) {
-                $res = apc_delete($key);
-                $success = !$res && $success ? false : $success;
-            }
+            $res = $this->flushItem($item, $prefix);
+            $success = !$res && $success ? false : $success;
         }
 
         return $success;
@@ -143,5 +138,25 @@ class ApcCache extends AbstractCache
     protected function getCacheKey($key)
     {
         return sprintf('%s%s', $this->prefix, $key);
+    }
+
+    /**
+     * Flush the cache item.
+     *
+     * @param array       $item
+     * @param string|null $prefix
+     *
+     * @return bool
+     */
+    protected function flushItem(array $item, $prefix = null)
+    {
+        $key = isset($item['key']) ? $item['key'] : $item['info'];
+        $fPrefix = sprintf('%s%s', $this->prefix, $prefix);
+
+        if ('' === $fPrefix || 0 === strpos($key, $fPrefix)) {
+            return apc_delete($key);
+        }
+
+        return true;
     }
 }
