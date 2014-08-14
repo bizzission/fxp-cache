@@ -165,17 +165,7 @@ class MemcachedCache extends AbstractCache
      */
     public function increment($counter, $value = 1)
     {
-        $counter = $this->transformCounter($counter);
-        $key = $this->getCacheKey($counter->getName());
-
-        $res = $this->client->increment($key, $value);
-
-        if (false === $res) {
-            $this->client->set($key, $value);
-            $res = $value;
-        }
-
-        return new Counter($counter->getName(), $res);
+        return $this->doIncrement('increment', $counter, $value);
     }
 
     /**
@@ -183,17 +173,7 @@ class MemcachedCache extends AbstractCache
      */
     public function decrement($counter, $value = 1)
     {
-        $counter = $this->transformCounter($counter);
-        $key = $this->getCacheKey($counter->getName());
-
-        $res = $this->client->decrement($key, $value);
-
-        if (false === $res) {
-            $this->client->set($key, -$value);
-            $res = -$value;
-        }
-
-        return new Counter($counter->getName(), $res);
+        return $this->doIncrement('decrement', $counter, $value);
     }
 
     /**
@@ -206,5 +186,26 @@ class MemcachedCache extends AbstractCache
     protected function getCacheKey($key)
     {
         return sprintf('%s%s', $this->prefix, $key);
+    }
+
+    /**
+     * @param string         $method  The method
+     * @param Counter|string $counter The counter
+     * @param int            $value   The value
+     * @return Counter
+     */
+    protected function doIncrement($method, $counter, $value)
+    {
+        $counter = $this->transformCounter($counter);
+        $key = $this->getCacheKey($counter->getName());
+
+        $res = $this->client->$method($key, $value);
+
+        if (false === $res) {
+            $res = 'decrement' === $method ? -$value : $value;
+            $this->client->set($key, $res);
+        }
+
+        return new Counter($counter->getName(), $res);
     }
 }
