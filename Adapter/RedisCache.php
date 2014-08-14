@@ -119,17 +119,7 @@ class RedisCache extends AbstractCache
             return (bool) $this->client->executeCommand($cmd);
         }
 
-        $success = true;
-        $cmd = $this->client->createCommand('keys', array($prefix.'*'));
-        $list = $this->client->executeCommand($cmd);
-
-        foreach ($list as $item) {
-            $item = substr($item, strlen($this->prefix));
-            $res = $this->flush($item);
-            $success = !$res && $success ? false : $success;
-        }
-
-        return $success;
+        return $this->flushAllItems($prefix);
     }
 
     /**
@@ -186,5 +176,27 @@ class RedisCache extends AbstractCache
         $value = (int) $this->client->executeCommand($cmd);
 
         return new Counter($counter->getName(), $value);
+    }
+
+    /**
+     * Flush all items cache.
+     *
+     * @param string $prefix
+     *
+     * @return bool
+     */
+    protected function flushAllItems($prefix)
+    {
+        $success = true;
+        $cmd = $this->client->createCommand('keys', array($prefix.'*'));
+        $list = $this->client->executeCommand($cmd);
+
+        foreach ($list as $item) {
+            $item = substr($item, strlen($this->prefix));
+            $res = $this->flush($item);
+            $success = !$res && $success ? false : $success;
+        }
+
+        return $success;
     }
 }
