@@ -192,6 +192,7 @@ class MemcachedCache extends AbstractCache
      * @param string         $method  The method
      * @param Counter|string $counter The counter
      * @param int            $value   The value
+     *
      * @return Counter
      */
     protected function doIncrement($method, $counter, $value)

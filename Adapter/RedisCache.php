@@ -175,6 +175,7 @@ class RedisCache extends AbstractCache
      * @param string         $cmd     The command
      * @param Counter|string $counter The counter
      * @param int            $value   The value
+     *
      * @return Counter
      */
     protected function doIncrement($cmd, $counter, $value)
