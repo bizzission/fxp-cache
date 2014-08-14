@@ -63,7 +63,7 @@ final class CacheElement
     {
         $this->key = $key;
         $this->data = $data;
-        $this->ttl = abs($ttl);
+        $this->ttl = (int) abs($ttl);
         $this->createdAt = (null === $createdAt) ? new \DateTime() : $createdAt;
         $this->interval = new \DateInterval(sprintf('PT%sS', $this->ttl));
     }
