@@ -71,4 +71,42 @@ abstract class AbstractCache implements CacheInterface
 
         return new CacheElement($key, null, 0, $now->sub(new \DateInterval('PT1S')));
     }
+
+    /**
+     * Do flush all items.
+     *
+     * @param string $prefix
+     *
+     * @return bool
+     */
+    protected function flushAllItems($prefix)
+    {
+        $success = true;
+
+        foreach ($this->getFlushAllItems($prefix) as $item) {
+            $res = $this->flushItem($item, $prefix);
+            $success = !$res && $success ? false : $success;
+        }
+
+        return $success;
+    }
+
+    /**
+     * Gets all items for the flush.
+     *
+     * @param string|null $prefix
+     *
+     * @return array
+     */
+    abstract protected function getFlushAllItems($prefix = null);
+
+    /**
+     * Flush the cache item.
+     *
+     * @param mixed  $item
+     * @param string $prefix
+     *
+     * @return bool
+     */
+    abstract protected function flushItem($item, $prefix);
 }

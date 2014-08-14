@@ -165,6 +165,28 @@ class MemcachedCache extends AbstractCache
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function getFlushAllItems($prefix = null)
+    {
+        return $this->client->getAllKeys();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function flushItem($item, $prefix)
+    {
+        $fPrefix = sprintf('%s%s', $this->prefix, $prefix);
+
+        if (0 === strpos($item, $fPrefix)) {
+            return $this->client->delete($item);
+        }
+
+        return true;
+    }
+
+    /**
      * Gets the cache key.
      *
      * @param string $key The cache key
@@ -196,29 +218,5 @@ class MemcachedCache extends AbstractCache
         }
 
         return new Counter($counter->getName(), $res);
-    }
-
-    /**
-     * Flush all items cache.
-     *
-     * @param string $prefix
-     *
-     * @return bool
-     */
-    protected function flushAllItems($prefix)
-    {
-        $success = true;
-        $list = $this->client->getAllKeys();
-
-        foreach ($list as $keyPrefixed) {
-            $fPrefix = sprintf('%s%s', $this->prefix, $prefix);
-
-            if (0 === strpos($keyPrefixed, $fPrefix)) {
-                $res = $this->client->delete($keyPrefixed);
-                $success = !$res && $success ? false : $success;
-            }
-        }
-
-        return $success;
     }
 }

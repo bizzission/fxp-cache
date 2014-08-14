@@ -115,17 +115,7 @@ class PhpCache extends AbstractCache
      */
     public function flushAll($prefix = null)
     {
-        $success = true;
-        $finder = new Finder();
-        $finder->files()->in($this->getCachePath());
-
-        /* @var \SplFileInfo $file */
-        foreach ($finder as $file) {
-            $res = $this->flushItem($file, $prefix);
-            $success = !$res && $success ? false : $success;
-        }
-
-        return $success;
+        return $this->flushAllItems($prefix);
     }
 
     /**
@@ -157,6 +147,32 @@ class PhpCache extends AbstractCache
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function getFlushAllItems($prefix = null)
+    {
+        $finder = new Finder();
+        $finder->files()->in($this->getCachePath());
+
+        return $finder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function flushItem($item, $prefix)
+    {
+        /* @var \SplFileInfo $item */
+        $key = substr($item->getFilename(), 0, strlen($item->getFilename()) - 4);
+
+        if (null === $prefix || 0 === strpos($key, $prefix)) {
+            return $this->flush($key);
+        }
+
+        return true;
+    }
+
+    /**
      * Gets the cache path.
      *
      * @return string
@@ -178,24 +194,5 @@ class PhpCache extends AbstractCache
     protected function getCacheKey($key)
     {
         return sprintf('%s/%s.php', $this->getCachePath(), $key);
-    }
-
-    /**
-     * Flush the cache item.
-     *
-     * @param \SplFileInfo $file
-     * @param string|null  $prefix
-     *
-     * @return bool
-     */
-    protected function flushItem(\SplFileInfo $file, $prefix = null)
-    {
-        $key = substr($file->getFilename(), 0, strlen($file->getFilename()) - 4);
-
-        if (null === $prefix || 0 === strpos($key, $prefix)) {
-            return $this->flush($key);
-        }
-
-        return true;
     }
 }

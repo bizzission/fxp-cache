@@ -90,15 +90,7 @@ class ApcCache extends AbstractCache
      */
     public function flushAll($prefix = null)
     {
-        $success = true;
-        $info = apc_cache_info('user');
-
-        foreach ($info['cache_list'] as $item) {
-            $res = $this->flushItem($item, $prefix);
-            $success = !$res && $success ? false : $success;
-        }
-
-        return $success;
+        return $this->flushAllItems($prefix);
     }
 
     /**
@@ -129,26 +121,19 @@ class ApcCache extends AbstractCache
     }
 
     /**
-     * Gets the cache key.
-     *
-     * @param string $key The cache key
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getCacheKey($key)
+    protected function getFlushAllItems($prefix = null)
     {
-        return sprintf('%s%s', $this->prefix, $key);
+        $info = apc_cache_info('user');
+
+        return $info['cache_list'];
     }
 
     /**
-     * Flush the cache item.
-     *
-     * @param array       $item
-     * @param string|null $prefix
-     *
-     * @return bool
+     * {@inheritdoc}
      */
-    protected function flushItem(array $item, $prefix = null)
+    protected function flushItem($item, $prefix)
     {
         $key = isset($item['key']) ? $item['key'] : $item['info'];
         $fPrefix = sprintf('%s%s', $this->prefix, $prefix);
@@ -158,5 +143,17 @@ class ApcCache extends AbstractCache
         }
 
         return true;
+    }
+
+    /**
+     * Gets the cache key.
+     *
+     * @param string $key The cache key
+     *
+     * @return string
+     */
+    protected function getCacheKey($key)
+    {
+        return sprintf('%s%s', $this->prefix, $key);
     }
 }
