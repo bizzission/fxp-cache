@@ -39,12 +39,7 @@ abstract class AbstractCache implements CacheInterface
      */
     public function decrement($counter, $value = 1)
     {
-        $counter = $this->transformCounter($counter);
-        $counter = new Counter($counter->getName(), $counter->getValue() + (-1 * $value));
-
-        $this->setCounter($counter);
-
-        return $counter;
+        return $this->increment($counter, -1 * $value);
     }
 
     /**
