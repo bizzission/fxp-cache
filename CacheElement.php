@@ -59,7 +59,7 @@ final class CacheElement
      * @param integer   $ttl       The time to live
      * @param \DateTime $createdAt The created date time
      */
-    public function __construct($key, $data, $ttl = CacheElement::DAY, \DateTime $createdAt = null)
+    public function __construct($key, $data, $ttl = self::DAY, \DateTime $createdAt = null)
     {
         $this->key = $key;
         $this->data = $data;
