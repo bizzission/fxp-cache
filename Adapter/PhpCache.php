@@ -121,12 +121,8 @@ class PhpCache extends AbstractCache
 
         /* @var \SplFileInfo $file */
         foreach ($finder as $file) {
-            $key = substr($file->getFilename(), 0, strlen($file->getFilename()) - 4);
-
-            if (null === $prefix || 0 === strpos($key, $prefix)) {
-                $res = $this->flush($key);
-                $success = !$res && $success ? false : $success;
-            }
+            $res = $this->flushItem($file, $prefix);
+            $success = !$res && $success ? false : $success;
         }
 
         return $success;
@@ -182,5 +178,24 @@ class PhpCache extends AbstractCache
     protected function getCacheKey($key)
     {
         return sprintf('%s/%s.php', $this->getCachePath(), $key);
+    }
+
+    /**
+     * Flush the cache item.
+     *
+     * @param \SplFileInfo $file
+     * @param string|null  $prefix
+     *
+     * @return bool
+     */
+    protected function flushItem(\SplFileInfo $file, $prefix = null)
+    {
+        $key = substr($file->getFilename(), 0, strlen($file->getFilename()) - 4);
+
+        if (null === $prefix || 0 === strpos($key, $prefix)) {
+            return $this->flush($key);
+        }
+
+        return true;
     }
 }
