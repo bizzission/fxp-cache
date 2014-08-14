@@ -171,6 +171,12 @@ class RedisCache extends AbstractCache
         return $this->doIncrement('decrby', $counter, $value);
     }
 
+    /**
+     * @param string         $cmd     The command
+     * @param Counter|string $counter The counter
+     * @param int            $value   The value
+     * @return Counter
+     */
     protected function doIncrement($cmd, $counter, $value)
     {
         $counter = $this->transformCounter($counter);
