@@ -160,12 +160,7 @@ class RedisCache extends AbstractCache
      */
     public function increment($counter, $value = 1)
     {
-        $counter = $this->transformCounter($counter);
-
-        $cmd = $this->client->createCommand('incrby', array($counter->getName(), $value));
-        $value = (int) $this->client->executeCommand($cmd);
-
-        return new Counter($counter->getName(), $value);
+        return $this->doIncrement('incrby', $counter, $value);
     }
 
     /**
@@ -173,9 +168,14 @@ class RedisCache extends AbstractCache
      */
     public function decrement($counter, $value = 1)
     {
+        return $this->doIncrement('decrby', $counter, $value);
+    }
+
+    protected function doIncrement($cmd, $counter, $value)
+    {
         $counter = $this->transformCounter($counter);
 
-        $cmd = $this->client->createCommand('decrby', array($counter->getName(), $value));
+        $cmd = $this->client->createCommand($cmd, array($counter->getName(), $value));
         $value = (int) $this->client->executeCommand($cmd);
 
         return new Counter($counter->getName(), $value);
