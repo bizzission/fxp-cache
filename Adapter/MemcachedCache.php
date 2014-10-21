@@ -113,7 +113,7 @@ class MemcachedCache extends AbstractCache
      */
     public function flushAll($prefix = null)
     {
-        if (null === $prefix && (null == $this->prefix || '' === $this->prefix)) {
+        if (null === $prefix && (null === $this->prefix || '' === $this->prefix)) {
             return $this->client->flush();
         }
 
