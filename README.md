@@ -1,8 +1,7 @@
 Sonatra Cache
 =============
 
-[![Latest Stable Version](https://poser.pugx.org/sonatra/cache/v/stable.svg)](https://packagist.org/packages/sonatra/cache)
-[![Latest Unstable Version](https://poser.pugx.org/sonatra/cache/v/unstable.svg)](https://packagist.org/packages/sonatra/cache)
+[![Latest Version](https://img.shields.io/packagist/v/sonatra/cache.svg)](https://packagist.org/packages/sonatra/cache)
 [![Build Status](https://travis-ci.org/sonatra/sonatra-cache.svg)](https://travis-ci.org/sonatra/sonatra-cache)
 [![Coverage Status](https://img.shields.io/coveralls/sonatra/sonatra-cache.svg)](https://coveralls.io/r/sonatra/sonatra-cache)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sonatra/sonatra-cache/badges/quality-score.png)](https://scrutinizer-ci.com/g/sonatra/sonatra-cache)
