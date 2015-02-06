@@ -2,10 +2,10 @@ Sonatra Cache
 =============
 
 [![Latest Version](https://img.shields.io/packagist/v/sonatra/cache.svg)](https://packagist.org/packages/sonatra/cache)
-[![Build Status](https://travis-ci.org/sonatra/sonatra-cache.svg)](https://travis-ci.org/sonatra/sonatra-cache)
-[![Coverage Status](https://img.shields.io/coveralls/sonatra/sonatra-cache.svg)](https://coveralls.io/r/sonatra/sonatra-cache)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sonatra/sonatra-cache/badges/quality-score.png)](https://scrutinizer-ci.com/g/sonatra/sonatra-cache)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/98e1fc05-ffc4-4cbe-b8a2-0836264e7f09/mini.png)](https://insight.sensiolabs.com/projects/98e1fc05-ffc4-4cbe-b8a2-0836264e7f09)
+[![Build Status](https://img.shields.io/travis/sonatra/sonatra-cache/master.svg)](https://travis-ci.org/sonatra/sonatra-cache)
+[![Coverage Status](https://img.shields.io/coveralls/sonatra/sonatra-cache/master.svg)](https://coveralls.io/r/sonatra/sonatra-cache?branch=master)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/sonatra/sonatra-cache.svg)](https://scrutinizer-ci.com/g/sonatra/sonatra-cache?branch=master)
+[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/98e1fc05-ffc4-4cbe-b8a2-0836264e7f09.svg)](https://insight.sensiolabs.com/projects/98e1fc05-ffc4-4cbe-b8a2-0836264e7f09)
 
 The Sonatra Cache is a small library for manage the different system of cache.
 
