@@ -151,6 +151,7 @@ class PhpCache extends AbstractCache
      */
     protected function getFlushAllItems($prefix = null)
     {
+        $this->filesystem->mkdir($this->getCachePath());
         $finder = new Finder();
         $finder->files()->in($this->getCachePath());
 
