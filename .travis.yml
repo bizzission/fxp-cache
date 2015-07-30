@@ -19,6 +19,8 @@ matrix:
         - php: nightly
         - php: hhvm
 
+    fast_finish: true
+
 services:
   - memcached
   - redis-server
