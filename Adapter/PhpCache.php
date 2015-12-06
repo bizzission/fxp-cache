@@ -60,10 +60,9 @@ class PhpCache extends AbstractCache
     {
         $createAt = new \DateTime();
         $content = sprintf("<?php\n\nreturn array('createdAt' => %s, 'ttl' => %s, 'data' => '%s');\n", $createAt->format('U'), $ttl, serialize($value));
-        $mode = 0666 & ~umask();
         $element = new CacheElement($key, $value, $ttl, $createAt);
 
-        $this->filesystem->dumpFile($this->getCacheKey($key), $content, $mode);
+        $this->filesystem->dumpFile($this->getCacheKey($key), $content);
 
         return $element;
     }
