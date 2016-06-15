@@ -35,7 +35,7 @@ class PhpCacheTest extends AbstractCacheTest
      */
     public function getMockCache($prefix = null)
     {
-        $fs = $this->getMock('Symfony\Component\Filesystem\Filesystem');
+        $fs = $this->getMockBuilder('Symfony\Component\Filesystem\Filesystem')->getMock();
 
         $fs->expects($this->once())
             ->method('remove')
