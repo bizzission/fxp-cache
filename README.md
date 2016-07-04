@@ -7,6 +7,10 @@ Sonatra Cache
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/sonatra/sonatra-cache.svg)](https://scrutinizer-ci.com/g/sonatra/sonatra-cache?branch=master)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/98e1fc05-ffc4-4cbe-b8a2-0836264e7f09.svg)](https://insight.sensiolabs.com/projects/98e1fc05-ffc4-4cbe-b8a2-0836264e7f09)
 
+> This library is deprecated in favor of the [PSR-6 Caching Interface]
+> (http://www.php-fig.org/psr/psr-6/). The [Symfony PSR-6 Cache Component](https://github.com/symfony/cache)
+> is an excellent candidate.
+
 The Sonatra Cache is a small library for manage the different system of cache.
 
 Features include:
