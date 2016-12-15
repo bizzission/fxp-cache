@@ -66,7 +66,7 @@ class ApcuAdapter extends BaseApcuAdapter implements AdapterInterface
      */
     protected function getAllItems()
     {
-        $info = apc_cache_info('user');
+        $info = apcu_cache_info();
 
         return $info['cache_list'];
     }
