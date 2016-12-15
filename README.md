@@ -16,6 +16,7 @@ Features include:
   - Apcu
   - Array
   - Chain
+  - Doctrine
   - Filesystem
   - Null
   - PDO
