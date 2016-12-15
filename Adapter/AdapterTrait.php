@@ -15,10 +15,6 @@ namespace Sonatra\Component\Cache\Adapter;
  * Adapter Trait.
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
- *
- * @property $logger
- *
- * @method doClear($namespace)
  */
 trait AdapterTrait
 {
