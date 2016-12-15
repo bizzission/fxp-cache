@@ -150,7 +150,7 @@ trait AdapterTrait
      */
     private function getReflectionClass()
     {
-        if (null ==$this->ref) {
+        if (null === $this->ref) {
             $this->ref = new \ReflectionClass($this);
         }
 
