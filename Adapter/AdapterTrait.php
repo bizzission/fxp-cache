@@ -11,8 +11,6 @@
 
 namespace Sonatra\Component\Cache\Adapter;
 
-use Symfony\Component\Cache\CacheItem;
-
 /**
  * Adapter Trait.
  *
@@ -36,29 +34,7 @@ trait AdapterTrait
     {
         $this->clearDeferredByPrefix($prefix);
 
-        try {
-            return $this->doClearByPrefix($this->getNamespace(), $prefix);
-        } catch (\Exception $e) {
-            CacheItem::log($this->logger,
-                sprintf('Failed to clear the cache by prefix "%s"', $prefix),
-                array('exception' => $e)
-            );
-
-            return false;
-        }
-    }
-
-    /**
-     * Action to delete all items identified by the prefix in the pool.
-     *
-     * @param string $namespace The namespace
-     * @param string $prefix    The prefix
-     *
-     * @return bool
-     */
-    protected function doClearByPrefix($namespace, $prefix)
-    {
-        return $this->doClear($namespace.$prefix);
+        return $this->doClearByPrefix($this->getNamespace(), $prefix);
     }
 
     /**
@@ -156,4 +132,14 @@ trait AdapterTrait
 
         return $this->ref;
     }
+
+    /**
+     * Action to delete all items identified by the prefix in the pool.
+     *
+     * @param string $namespace The namespace
+     * @param string $prefix    The prefix
+     *
+     * @return bool
+     */
+    abstract protected function doClearByPrefix($namespace, $prefix);
 }
