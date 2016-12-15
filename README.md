@@ -19,6 +19,7 @@ Features include:
   - Filesystem
   - Null
   - PHP Array
+  - PHP Files
   - Redis
 
 Documentation
