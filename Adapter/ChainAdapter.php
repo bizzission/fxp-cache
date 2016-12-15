@@ -31,9 +31,9 @@ class ChainAdapter extends BaseChainAdapter implements AdapterInterface
         $cleared = true;
 
         foreach ($adapters as $adapter) {
-            if ($adapter instanceof AdapterInterface) {
-                $cleared = $adapter->clearByPrefix($prefix) && $cleared;
-            }
+            $cleared = $adapter instanceof AdapterInterface
+                ? $adapter->clearByPrefix($prefix) && $cleared
+                : $adapter->clear() && $cleared;
         }
 
         return $cleared;

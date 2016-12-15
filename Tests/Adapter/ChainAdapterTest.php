@@ -13,6 +13,7 @@ namespace Sonatra\Component\Cache\Tests\Adapter;
 
 use Sonatra\Component\Cache\Adapter\ArrayAdapter;
 use Sonatra\Component\Cache\Adapter\ChainAdapter;
+use Symfony\Component\Cache\Adapter\ArrayAdapter as SymfonyArrayAdapter;
 
 /**
  * Chain Cache Adapter Test.
@@ -24,6 +25,7 @@ class ChainAdapterTest extends AbstractAdapterTest
     protected function setUp()
     {
         $this->adapter = new ChainAdapter(array(
+            new SymfonyArrayAdapter(),
             new ArrayAdapter(),
         ));
         $this->adapter->clear();
