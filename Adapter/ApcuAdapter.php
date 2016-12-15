@@ -30,9 +30,7 @@ class ApcuAdapter extends BaseApcuAdapter implements AdapterInterface
         $ok = true;
 
         foreach ($this->getAllItems() as $item) {
-            $ok = !$this->doClearItem($item, $namespace.$prefix) && $ok
-                ? false
-                : $ok;
+            $ok = !$this->doClearItem($item, $namespace.$prefix) && $ok ? false : $ok;
         }
 
         return $ok;
