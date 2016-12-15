@@ -32,7 +32,9 @@ abstract class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-        $this->adapter->clear();
+        if (null !== $this->adapter) {
+            $this->adapter->clear();
+        }
     }
 
     public function testClearByPrefix()
