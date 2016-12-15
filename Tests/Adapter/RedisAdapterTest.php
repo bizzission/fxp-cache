@@ -21,7 +21,7 @@ use Sonatra\Component\Cache\Adapter\RedisAdapter;
  */
 class RedisAdapterTest extends AbstractAdapterTest
 {
-    public function setUp()
+    protected function setUp()
     {
         if (!class_exists('\Predis\Client', true)) {
             $this->markTestSkipped('Predis is not installed');

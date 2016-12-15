@@ -21,7 +21,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class FilesystemAdapterTest extends AbstractAdapterTest
 {
-    public function setUp()
+    protected function setUp()
     {
         $this->adapter = new FilesystemAdapter('', 0);
         $this->adapter->clear();
