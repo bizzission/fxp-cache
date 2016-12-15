@@ -6,16 +6,19 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+env:
+    global:
+        - MIN_PHP=5.6.0
+
 matrix:
     include:
-        - php: 5.5
         - php: 5.6
         - php: 7.0
-        - php: hhvm
+        - php: hhvm-stable
         - php: nightly
 
     allow_failures:
-        - php: hhvm
+        - php: hhvm-stable
         - php: nightly
 
     fast_finish: true
@@ -24,13 +27,21 @@ services:
   - memcached
   - redis-server
 
+before_install:
+    - PHP=$TRAVIS_PHP_VERSION
+    - if [[ ! $PHP = hhvm* ]]; then INI_FILE=~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; else INI_FILE=/etc/hhvm/php.ini; fi
+
+    - if [[ ! $skip ]]; then echo opcache.enable_cli = 1 >> $INI_FILE; fi
+
+    - if [[ ! $skip && $PHP = 5.* ]]; then (echo yes | pecl install -f apcu-4.0.11 && echo apc.enable_cli = 1 >> $INI_FILE); fi
+    - if [[ ! $skip && $PHP = 7.* ]]; then (echo yes | pecl install -f apcu-5.1.6 && echo apc.enable_cli = 1 >> $INI_FILE); fi
+
+    - if [[ ! $skip && $PHP = 5.* ]]; then pecl install -f memcached-2.1.0; fi
+    - if [[ ! $skip && $PHP = 5.* ]]; then echo extension = memcached.so >> $INI_FILE; fi
+
 before_script:
-    - sh -c "if [[ $TRAVIS_PHP_VERSION != 'hhvm' && `php-config --vernum` -ge 50500 ]] ; then pecl config-set preferred_state beta; printf "yes\n" | pecl install apcu ; else echo 'extension="apc.so"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;fi"
-    - if [ $TRAVIS_PHP_VERSION != 'hhvm' ]; then echo "extension=memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
-    - if [ $TRAVIS_PHP_VERSION != 'hhvm' ]; then echo "apc.enabled=1\n" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
-    - if [ $TRAVIS_PHP_VERSION != 'hhvm' ]; then echo "apc.enable_cli=1\n" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
     - composer self-update
-    - composer global require --prefer-source phpunit/phpunit:"^4.8 || 5.3.*" satooshi/php-coveralls:^1.0.0
+    - composer global require --prefer-source phpunit/phpunit:"^5.7" satooshi/php-coveralls:^1.0.0
     - composer install --prefer-source
     - mkdir -p ./build/logs
 
@@ -39,7 +50,7 @@ script:
 
 after_script:
     - 'echo ''coverage_clover: build/logs/clover.xml'' >> ./.coveralls.yml'
-    - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "nightly" ]; then php ~/.composer/vendor/bin/coveralls -v; fi;'
+    - if [[ $PHP = 5.* ]]; then php ~/.composer/vendor/bin/coveralls -v; fi
 
 notifications:
     email: false
