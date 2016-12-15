@@ -18,6 +18,7 @@ Features include:
   - Chain
   - Filesystem
   - Null
+  - PHP Array
   - Redis
 
 Documentation
