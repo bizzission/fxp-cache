@@ -61,10 +61,10 @@ abstract class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // set
         $item1->set($value1);
-        $this->adapter->save($item1);
+        $this->assertTrue($this->adapter->save($item1));
 
         $item2->set($value2);
-        $this->adapter->save($item2);
+        $this->assertTrue($this->adapter->save($item2));
 
         // refresh
         $item1 = $this->adapter->getItem($key1);
@@ -111,7 +111,7 @@ abstract class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // set
         $item1->set($value1);
-        $this->adapter->save($item1);
+        $this->assertTrue($this->adapter->save($item1));
 
         $this->adapter->saveDeferred($item2);
 
