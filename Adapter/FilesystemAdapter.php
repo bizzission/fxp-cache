@@ -29,29 +29,56 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
     {
         $ok = true;
         $directory = $this->getPropertyValue('directory');
-        $keys = array();
 
         /* @var \SplFileInfo $file */
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory,
                 \FilesystemIterator::SKIP_DOTS)) as $file) {
-            if ($file->isFile()) {
-                if (!$h = @fopen($file, 'rb')) {
-                    continue;
-                }
-
-                rawurldecode(rtrim(fgets($h)));
-                $value = stream_get_contents($h);
-                $key = substr($value, 0, strpos($value, "\n"));
-                fclose($h);
-
-                if ($prefix === '' || 0 === strpos($value, $prefix)) {
-                    $keys[] = $key;
-                }
-            }
-
-            $ok = ($file->isDir() || $this->deleteItems($keys) || !file_exists($file)) && $ok;
+            $this->doClearFile($ok, $file, $prefix);
         }
 
         return $ok;
+    }
+
+    /**
+     * Action to clear all items in file starting with the prefix.
+     *
+     * @param bool         $ok     The delete status
+     * @param \SplFileInfo $file   The spl file info
+     * @param string       $prefix The prefix
+     */
+    private function doClearFile(&$ok, \SplFileInfo $file, $prefix)
+    {
+        $keys = array();
+
+        if ($file->isFile()) {
+            $key = $this->getFileKey($file);
+
+            if (null !== $key && ($prefix === '' || 0 === strpos($key, $prefix))) {
+                $keys[] = $key;
+            }
+        }
+
+        $ok = ($file->isDir() || $this->deleteItems($keys) || !file_exists($file)) && $ok;
+    }
+
+    /**
+     * Get the key of file.
+     *
+     * @param \SplFileInfo $file The spl file info
+     *
+     * @return string|null
+     */
+    private function getFileKey(\SplFileInfo $file)
+    {
+        $key = null;
+
+        if ($h = @fopen($file, 'rb')) {
+            rawurldecode(rtrim(fgets($h)));
+            $value = stream_get_contents($h);
+            fclose($h);
+            $key = substr($value, 0, strpos($value, "\n"));
+        }
+
+        return $key;
     }
 }
