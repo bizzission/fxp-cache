@@ -18,6 +18,7 @@ Features include:
   - Chain
   - Doctrine
   - Filesystem
+  - Memcached
   - Null
   - PDO
   - PHP Array

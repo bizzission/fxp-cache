@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "087098055bc7bb814f3b739fc1843ea0",
-    "content-hash": "cca54ee9a84661d3f2b7cb7d8e9a606f",
+    "hash": "fd55289e398cb979256f545645a42c88",
+    "content-hash": "15a228aedcafaf98e7e5a5c61a5ee390",
     "packages": [
         {
             "name": "psr/cache",
@@ -102,16 +102,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v3.2.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "a2503bbf8ef729f4eb7b134efee6217f49ecd56d"
+                "reference": "16b647274f0c6e5045284f72125316904b028034"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/a2503bbf8ef729f4eb7b134efee6217f49ecd56d",
-                "reference": "a2503bbf8ef729f4eb7b134efee6217f49ecd56d",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/16b647274f0c6e5045284f72125316904b028034",
+                "reference": "16b647274f0c6e5045284f72125316904b028034",
                 "shasum": ""
             },
             "require": {
@@ -134,7 +134,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "3.3-dev"
                 }
             },
             "autoload": {
@@ -165,7 +165,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2016-12-13 08:24:57"
+            "time": "2016-12-13 15:32:21"
         }
     ],
     "packages-dev": [
@@ -740,7 +740,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "symfony/cache": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
