@@ -18,6 +18,7 @@ Features include:
   - Chain
   - Filesystem
   - Null
+  - PDO
   - PHP Array
   - PHP Files
   - Redis
