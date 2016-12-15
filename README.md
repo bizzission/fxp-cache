@@ -14,6 +14,7 @@ Features include:
 - Delete only all items by prefix
 - Cache adapters:
   - Filesystem
+  - Redis
 
 Documentation
 -------------
