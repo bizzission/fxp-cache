@@ -28,7 +28,7 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
     protected function doClearByPrefix($namespace, $prefix)
     {
         $ok = true;
-        $directory = $this->getPropertyValue('directory');
+        $directory = AdapterUtil::getPropertyValue($this, 'directory');
 
         /* @var \SplFileInfo $file */
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory,
