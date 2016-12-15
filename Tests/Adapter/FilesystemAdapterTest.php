@@ -15,7 +15,7 @@ use Sonatra\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * Redis Cache Adapter Test.
+ * Filesystem Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */

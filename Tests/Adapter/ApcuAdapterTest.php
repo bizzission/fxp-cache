@@ -14,7 +14,7 @@ namespace Sonatra\Component\Cache\Tests\Adapter;
 use Sonatra\Component\Cache\Adapter\ApcuAdapter;
 
 /**
- * Redis Cache Adapter Test.
+ * Apcu Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
