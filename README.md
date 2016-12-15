@@ -16,6 +16,7 @@ Features include:
   - Apcu
   - Array
   - Filesystem
+  - Null
   - Redis
 
 Documentation
