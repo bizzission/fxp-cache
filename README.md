@@ -15,6 +15,7 @@ Features include:
 - Cache adapters:
   - Apcu
   - Array
+  - Chain
   - Filesystem
   - Null
   - Redis
