@@ -127,4 +127,14 @@ abstract class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->adapter->hasItem($key1));
         $this->assertFalse($this->adapter->hasItem($key2));
     }
+
+    public function testClearByPrefixes()
+    {
+        $prefixes = array(
+            static::PREFIX_1,
+            static::PREFIX_2,
+        );
+        $res = $this->adapter->clearByPrefixes($prefixes);
+        $this->assertTrue($res);
+    }
 }

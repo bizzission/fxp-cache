@@ -18,6 +18,8 @@ namespace Sonatra\Component\Cache\Adapter;
  */
 trait AdapterTrait
 {
+    use AdapterPrefixesTrait;
+
     /**
      * {@inheritdoc}
      */

@@ -20,6 +20,8 @@ use Symfony\Component\Cache\Adapter\DoctrineAdapter as BaseDoctrineAdapter;
  */
 class DoctrineAdapter extends BaseDoctrineAdapter implements AdapterInterface
 {
+    use AdapterPrefixesTrait;
+
     /**
      * {@inheritdoc}
      */

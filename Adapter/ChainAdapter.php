@@ -21,6 +21,8 @@ use Symfony\Component\Cache\Adapter\ChainAdapter as BaseChainAdapter;
  */
 class ChainAdapter extends BaseChainAdapter implements AdapterInterface
 {
+    use AdapterPrefixesTrait;
+
     /**
      * {@inheritdoc}
      */

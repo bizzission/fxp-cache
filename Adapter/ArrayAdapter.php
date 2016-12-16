@@ -20,6 +20,8 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter as BaseArrayAdapter;
  */
 class ArrayAdapter extends BaseArrayAdapter implements AdapterInterface
 {
+    use AdapterPrefixesTrait;
+
     /**
      * {@inheritdoc}
      */

@@ -11,22 +11,26 @@
 
 namespace Sonatra\Component\Cache\Adapter;
 
-use Symfony\Component\Cache\Adapter\NullAdapter as BaseNullAdapter;
-
 /**
- * Null Cache Adapter.
+ * Adapter Trait for clear by prefixes.
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
+ *
+ * @method bool clearByPrefix(string $prefix)
  */
-class NullAdapter extends BaseNullAdapter implements AdapterInterface
+trait AdapterPrefixesTrait
 {
-    use AdapterPrefixesTrait;
-
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefix($prefix)
+    public function clearByPrefixes(array $prefixes)
     {
-        return true;
+        $ok = true;
+
+        foreach ($prefixes as $prefix) {
+            $ok = $this->clearByPrefix($prefix) && $ok;
+        }
+
+        return $ok;
     }
 }

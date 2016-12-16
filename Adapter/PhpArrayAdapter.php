@@ -21,6 +21,8 @@ use Symfony\Component\Cache\Adapter\PhpArrayAdapter as BasePhpArrayAdapter;
  */
 class PhpArrayAdapter extends BasePhpArrayAdapter implements AdapterInterface
 {
+    use AdapterPrefixesTrait;
+
     /**
      * {@inheritdoc}
      */

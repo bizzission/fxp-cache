@@ -20,6 +20,8 @@ use Symfony\Component\Cache\Adapter\PhpFilesAdapter as BasePhpFilesAdapter;
  */
 class PhpFilesAdapter extends BasePhpFilesAdapter implements AdapterInterface
 {
+    use AdapterPrefixesTrait;
+
     /**
      * {@inheritdoc}
      */
