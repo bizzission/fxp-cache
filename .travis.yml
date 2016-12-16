@@ -36,7 +36,6 @@ before_install:
     - if [[ ! $skip && $PHP = 5.* ]]; then (echo yes | pecl install -f apcu-4.0.11 && echo apc.enable_cli = 1 >> $INI_FILE); fi
     - if [[ ! $skip && $PHP = 7.* ]]; then (echo yes | pecl install -f apcu-5.1.6 && echo apc.enable_cli = 1 >> $INI_FILE); fi
 
-    - if [[ ! $skip && $PHP = 5.* ]]; then pecl install -f memcached-2.1.0; fi
     - if [[ ! $skip && $PHP = 5.* ]]; then echo extension = memcached.so >> $INI_FILE; fi
 
 before_script:
