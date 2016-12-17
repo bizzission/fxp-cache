@@ -37,7 +37,7 @@ class RedisAdapterTest extends AbstractAdapterTest
             $this->markTestSkipped('Redis is not running');
         }
 
-        $redis = RedisAdapter::createConnection('redis://' . $redisHost . '/1', array(
+        $redis = RedisAdapter::createConnection('redis://'.$redisHost.'/1', array(
             'class' => Client::class,
             'timeout' => 3,
         ));
