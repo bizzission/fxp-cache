@@ -23,7 +23,10 @@
         "predis/predis": "^1.1.0"
     },
     "autoload": {
-        "psr-4": { "Sonatra\\Component\\Cache\\": "" }
+        "psr-4": { "Sonatra\\Component\\Cache\\": "" },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
     },
     "extra": {
         "branch-alias": {
