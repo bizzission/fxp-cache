@@ -14,11 +14,11 @@
     "minimum-stability": "stable",
     "prefer-stable": false,
     "require": {
-        "php": ">=5.6",
-        "symfony/cache": "^3.1.0|^3.2.2|^3.3.0@dev"
+        "php": ">=7.0.0",
+        "symfony/cache": "^3.3.0"
     },
     "require-dev": {
-        "symfony/filesystem": "^3.1.0",
+        "symfony/filesystem": "^3.3.0",
         "doctrine/dbal": "^2.5.0",
         "predis/predis": "^1.1.0"
     },
