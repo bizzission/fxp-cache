@@ -11,6 +11,7 @@
 
 namespace Sonatra\Component\Cache\Tests\Adapter;
 
+use PHPUnit\Framework\TestCase;
 use Sonatra\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Cache\CacheItem;
 
@@ -19,7 +20,7 @@ use Symfony\Component\Cache\CacheItem;
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-abstract class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractAdapterTest extends TestCase
 {
     const PREFIX_1 = 'prefix1_';
     const PREFIX_2 = 'prefix2_';
