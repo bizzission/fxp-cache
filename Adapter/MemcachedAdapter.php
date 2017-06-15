@@ -39,7 +39,7 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
     /**
      * Delete the key that starting by the prefix.
      *
-     * @param array  $id     The cache item id
+     * @param string $id     The cache item id
      * @param string $prefix The full prefix
      *
      * @return bool
@@ -59,7 +59,7 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
     /**
      * Get all items.
      *
-     * @return array[]
+     * @return string[]
      */
     protected function getAllItems()
     {
