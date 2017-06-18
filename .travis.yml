@@ -26,6 +26,7 @@ before_install:
 
     - echo opcache.enable_cli = 1 >> $INI_FILE
     - echo yes | pecl install -f apcu-5.1.6 && echo apc.enable_cli = 1 >> $INI_FILE
+    - echo extension = memcached.so >> $INI_FILE
 
 before_script:
     - composer self-update
