@@ -11,12 +11,16 @@
 
 namespace Sonatra\Component\Cache\Adapter;
 
+use Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
+
 /**
  * Adapter Trait for clear by prefixes.
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  *
- * @method bool start(string $name)
+ * @property AdapterInterface $pool
+ *
+ * @method TraceableAdapterEvent start(string $name)
  */
 trait TraceableTrait
 {
