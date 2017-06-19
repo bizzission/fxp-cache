@@ -25,7 +25,7 @@ class PhpFilesAdapter extends BasePhpFilesAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefix($prefix)
+    public function clearByPrefixes(array $prefixes)
     {
         return $this->clear();
     }

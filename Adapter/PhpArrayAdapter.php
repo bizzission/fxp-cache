@@ -26,14 +26,14 @@ class PhpArrayAdapter extends BasePhpArrayAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefix($prefix)
+    public function clearByPrefixes(array $prefixes)
     {
         $this->initializeForPrefix();
 
         /* @var BaseAdapterInterface|AdapterInterface $fallbackPool */
         $fallbackPool = AdapterUtil::getPropertyValue($this, 'fallbackPool');
-        $cleared = '' !== $prefix && $fallbackPool instanceof AdapterInterface
-            ? $this->clearItems($fallbackPool, $prefix)
+        $cleared = $fallbackPool instanceof AdapterInterface
+            ? $this->clearItems($fallbackPool, $prefixes)
             : $this->clear();
 
         return $cleared;
@@ -58,20 +58,22 @@ class PhpArrayAdapter extends BasePhpArrayAdapter implements AdapterInterface
      * Clear the items.
      *
      * @param AdapterInterface $fallbackPool The fallback pool
-     * @param string           $prefix       The prefix
+     * @param string[]         $prefixes     The prefixes
      *
      * @return bool
      */
-    private function clearItems(AdapterInterface $fallbackPool, $prefix)
+    private function clearItems(AdapterInterface $fallbackPool, array $prefixes)
     {
-        $cleared = $fallbackPool->clearByPrefix($prefix);
+        $cleared = $fallbackPool->clearByPrefixes($prefixes);
         $values = AdapterUtil::getPropertyValue($this, 'values');
         $save = false;
 
         foreach ($values as $key => $value) {
-            if (0 === strpos($key, $prefix)) {
-                unset($values[$key]);
-                $save = true;
+            foreach ($prefixes as $prefix) {
+                if ('' !== $prefix && 0 === strpos($key, $prefix)) {
+                    unset($values[$key]);
+                    $save = true;
+                }
             }
         }
 

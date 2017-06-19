@@ -25,16 +25,18 @@ class ArrayAdapter extends BaseArrayAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefix($prefix)
+    public function clearByPrefixes(array $prefixes)
     {
         $values = AdapterUtil::getPropertyValue($this, 'values');
         $expiries = AdapterUtil::getPropertyValue($this, 'expiries');
         $keys = array_unique(array_merge(array_keys($values), array_keys($expiries)));
         $ok = true;
 
-        foreach ($keys as $key) {
-            if ($prefix === '' || 0 === strpos($key, $prefix)) {
-                $ok = !$this->deleteItem($key) && $ok ? false : $ok;
+        foreach ($prefixes as $prefix) {
+            foreach ($keys as $key) {
+                if ($prefix === '' || 0 === strpos($key, $prefix)) {
+                    $ok = !$this->deleteItem($key) && $ok ? false : $ok;
+                }
             }
         }
 

@@ -26,7 +26,7 @@ class ChainAdapter extends BaseChainAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefix($prefix)
+    public function clearByPrefixes(array $prefixes)
     {
         /* @var BaseAdapterInterface[] $adapters */
         $adapters = AdapterUtil::getPropertyValue($this, 'adapters');
@@ -34,7 +34,7 @@ class ChainAdapter extends BaseChainAdapter implements AdapterInterface
 
         foreach ($adapters as $adapter) {
             $cleared = $adapter instanceof AdapterInterface
-                ? $adapter->clearByPrefix($prefix) && $cleared
+                ? $adapter->clearByPrefixes($prefixes) && $cleared
                 : $adapter->clear() && $cleared;
         }
 

@@ -16,21 +16,15 @@ namespace Sonatra\Component\Cache\Adapter;
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  *
- * @method bool clearByPrefix(string $prefix)
+ * @method bool clearByPrefixes(array $prefixes)
  */
 trait AdapterPrefixesTrait
 {
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefixes(array $prefixes)
+    public function clearByPrefix($prefix)
     {
-        $ok = true;
-
-        foreach ($prefixes as $prefix) {
-            $ok = $this->clearByPrefix($prefix) && $ok;
-        }
-
-        return $ok;
+        return $this->clearByPrefixes(array($prefix));
     }
 }

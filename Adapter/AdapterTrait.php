@@ -24,12 +24,17 @@ trait AdapterTrait
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefix($prefix)
+    public function clearByPrefixes(array $prefixes)
     {
-        $this->clearDeferredByPrefixes(array($prefix));
+        $this->clearDeferredByPrefixes($prefixes);
         $namespace = AdapterUtil::getPropertyValue($this, 'namespace');
+        $ok = true;
 
-        return $this->doClearByPrefix($namespace, $prefix);
+        foreach ($prefixes as $prefix) {
+            $ok = $this->doClearByPrefix($namespace, $prefix) && $ok;
+        }
+
+        return $ok;
     }
 
     /**
