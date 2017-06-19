@@ -26,6 +26,7 @@ Features include:
   - Redis
   - Simple Cache
   - Tag Aware
+  - Proxy
   - Traceable
   - Traceable Tag Aware
 
