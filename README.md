@@ -24,6 +24,7 @@ Features include:
   - PHP Array
   - PHP Files
   - Redis
+  - Tag Aware
   - Traceable
   - Traceable Tag Aware
 
