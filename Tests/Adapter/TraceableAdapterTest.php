@@ -13,6 +13,7 @@ namespace Sonatra\Component\Cache\Tests\Adapter;
 
 use Sonatra\Component\Cache\Adapter\NullAdapter;
 use Sonatra\Component\Cache\Adapter\TraceableAdapter;
+use Symfony\Component\Cache\Adapter\NullAdapter as SymfonyNullAdapter;
 
 /**
  * Traceable Cache Adapter Test.
@@ -36,6 +37,36 @@ class TraceableAdapterTest extends AbstractAdapterTest
     public function testClearByPrefixWithDeferredItem()
     {
         $res = $this->adapter->clearByPrefix(static::PREFIX_1);
+        $this->assertTrue($res);
+    }
+
+    public function getAdapters()
+    {
+        return array(
+            array(new TraceableAdapter(new NullAdapter())),
+            array(new TraceableAdapter(new SymfonyNullAdapter())),
+        );
+    }
+
+    /**
+     * @dataProvider getAdapters
+     *
+     * @param TraceableAdapter $adapter The adapter
+     */
+    public function testClearByPrefixWithDifferentAdapter(TraceableAdapter $adapter)
+    {
+        $res = $adapter->clearByPrefix(static::PREFIX_1);
+        $this->assertTrue($res);
+    }
+
+    /**
+     * @dataProvider getAdapters
+     *
+     * @param TraceableAdapter $adapter The adapter
+     */
+    public function testClearByPrefixesWithDifferentAdapter(TraceableAdapter $adapter)
+    {
+        $res = $adapter->clearByPrefixes(array(static::PREFIX_1, static::PREFIX_2));
         $this->assertTrue($res);
     }
 }

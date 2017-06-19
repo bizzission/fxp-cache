@@ -21,14 +21,4 @@ use Symfony\Component\Cache\Adapter\TraceableAdapter as BaseTraceableAdapter;
 class TraceableAdapter extends BaseTraceableAdapter implements AdapterInterface
 {
     use TraceableTrait;
-
-    /**
-     * Constructor.
-     *
-     * @param AdapterInterface $pool The pool adapter
-     */
-    public function __construct(AdapterInterface $pool)
-    {
-        parent::__construct($pool);
-    }
 }

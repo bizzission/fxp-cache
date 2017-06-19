@@ -33,7 +33,9 @@ trait TraceableTrait
         $event->result['prefix'] = $prefix;
 
         try {
-            return $event->result['result'] = $this->pool->clearByPrefix($prefix);
+            return $event->result['result'] = $this->pool instanceof AdapterInterface
+                ? $this->pool->clearByPrefix($prefix)
+                : $this->pool->clear();
         } finally {
             $event->end = microtime(true);
         }
@@ -48,7 +50,9 @@ trait TraceableTrait
         $event->result['prefixes'] = $prefixes;
 
         try {
-            return $event->result['result'] = $this->pool->clearByPrefixes($prefixes);
+            return $event->result['result'] = $this->pool instanceof AdapterInterface
+                ? $this->pool->clearByPrefixes($prefixes)
+                : $this->pool->clear();
         } finally {
             $event->end = microtime(true);
         }

@@ -21,14 +21,4 @@ use Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter as BaseTraceableTag
 class TraceableTagAwareAdapter extends BaseTraceableTagAwareAdapter implements TagAwareAdapterInterface
 {
     use TraceableTrait;
-
-    /**
-     * Constructor.
-     *
-     * @param TagAwareAdapterInterface $pool The pool adapter
-     */
-    public function __construct(TagAwareAdapterInterface $pool)
-    {
-        parent::__construct($pool);
-    }
 }
