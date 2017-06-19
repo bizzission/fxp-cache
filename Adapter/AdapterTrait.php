@@ -19,34 +19,17 @@ namespace Sonatra\Component\Cache\Adapter;
 trait AdapterTrait
 {
     use AdapterPrefixesTrait;
+    use AdapterDeferredTrait;
 
     /**
      * {@inheritdoc}
      */
     public function clearByPrefix($prefix)
     {
-        $this->clearDeferredByPrefix($prefix);
+        $this->clearDeferredByPrefixes(array($prefix));
         $namespace = AdapterUtil::getPropertyValue($this, 'namespace');
 
         return $this->doClearByPrefix($namespace, $prefix);
-    }
-
-    /**
-     * Clear the deferred by prefix.
-     *
-     * @param string $prefix The prefix
-     */
-    protected function clearDeferredByPrefix($prefix)
-    {
-        $deferred = AdapterUtil::getPropertyValue($this, 'deferred');
-
-        foreach ($deferred as $key => $value) {
-            if ($prefix === '' || 0 === strpos($key, $prefix)) {
-                unset($deferred[$key]);
-            }
-        }
-
-        AdapterUtil::setPropertyValue($this, 'deferred', $deferred);
     }
 
     /**
