@@ -50,7 +50,7 @@ class ApcuAdapter extends BaseApcuAdapter implements AdapterInterface
         $key = substr($id, strrpos($id, ':') + 1);
         $res = true;
 
-        if ($prefix === '' || 0 === strpos($id, $prefix)) {
+        if ('' === $prefix || 0 === strpos($id, $prefix)) {
             $res = $this->deleteItem($key);
         }
 

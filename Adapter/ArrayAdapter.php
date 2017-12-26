@@ -34,7 +34,7 @@ class ArrayAdapter extends BaseArrayAdapter implements AdapterInterface
 
         foreach ($prefixes as $prefix) {
             foreach ($keys as $key) {
-                if ($prefix === '' || 0 === strpos($key, $prefix)) {
+                if ('' === $prefix || 0 === strpos($key, $prefix)) {
                     $ok = !$this->deleteItem($key) && $ok ? false : $ok;
                 }
             }

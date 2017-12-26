@@ -53,7 +53,7 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
         if ($file->isFile()) {
             $key = $this->getFileKey($file);
 
-            if (null !== $key && ($prefix === '' || 0 === strpos($key, $prefix))) {
+            if (null !== $key && ('' === $prefix || 0 === strpos($key, $prefix))) {
                 $keys[] = $key;
             }
         }

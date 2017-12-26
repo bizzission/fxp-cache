@@ -29,7 +29,7 @@ trait AdapterDeferredTrait
 
         foreach ($prefixes as $prefix) {
             foreach ($deferred as $key => $value) {
-                if ($prefix === '' || 0 === strpos($key, $prefix)) {
+                if ('' === $prefix || 0 === strpos($key, $prefix)) {
                     unset($deferred[$key]);
                 }
             }
