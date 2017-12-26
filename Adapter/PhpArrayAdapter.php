@@ -31,7 +31,7 @@ class PhpArrayAdapter extends BasePhpArrayAdapter implements AdapterInterface
         $this->initializeForPrefix();
 
         /* @var BaseAdapterInterface|AdapterInterface $fallbackPool */
-        $fallbackPool = AdapterUtil::getPropertyValue($this, 'fallbackPool');
+        $fallbackPool = AdapterUtil::getPropertyValue($this, 'pool');
         $cleared = $fallbackPool instanceof AdapterInterface
             ? $this->clearItems($fallbackPool, $prefixes)
             : $this->clear();

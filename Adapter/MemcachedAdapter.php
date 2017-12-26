@@ -28,9 +28,11 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
     protected function doClearByPrefix($namespace, $prefix)
     {
         $ok = true;
+        $client = $this->getParentClient();
+        $version = AdapterUtil::getPropertyValue($this, 'namespaceVersion');
 
-        foreach ($this->getAllItems() as $key) {
-            $ok = !$this->doClearItem($key, $namespace.$prefix) && $ok ? false : $ok;
+        foreach ($this->getAllItems($client) as $key) {
+            $ok = !$this->doClearItem($key, $namespace.$version.$prefix) && $ok ? false : $ok;
         }
 
         return $ok;
@@ -44,12 +46,12 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
      *
      * @return bool
      */
-    protected function doClearItem($id, $prefix)
+    private function doClearItem($id, $prefix)
     {
         $key = substr($id, strrpos($id, ':') + 1);
         $res = true;
 
-        if ('' === $prefix || 0 === strpos($id, $prefix)) {
+        if (!empty($key) && ('' === $prefix || 0 === strpos($id, $prefix))) {
             $res = $this->deleteItem($key);
         }
 
@@ -59,13 +61,26 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
     /**
      * Get all items.
      *
+     * @param \Memcached $client The memcached client
+     *
      * @return string[]
      */
-    protected function getAllItems()
+    private function getAllItems(\Memcached $client)
     {
-        $client = AdapterUtil::getPropertyValue($this, 'client');
         $res = $client->getAllKeys();
 
         return false !== $res ? $res : array();
+    }
+
+    /**
+     * Get the client.
+     *
+     * @return \Memcached
+     */
+    private function getParentClient()
+    {
+        $client = AdapterUtil::getPropertyValue($this, 'client');
+
+        return null !== $client ? $client : AdapterUtil::getPropertyValue($this, 'lazyClient');
     }
 }

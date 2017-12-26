@@ -28,7 +28,7 @@ class TagAwareAdapter extends BaseTagAwareAdapter implements TagAwareAdapterInte
      */
     public function clearByPrefixes(array $prefixes)
     {
-        $itemsAdapter = AdapterUtil::getPropertyValue($this, 'itemsAdapter');
+        $itemsAdapter = AdapterUtil::getPropertyValue($this, 'pool');
         $this->clearDeferredByPrefixes($prefixes);
 
         return $itemsAdapter instanceof AdapterInterface
