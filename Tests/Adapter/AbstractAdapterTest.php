@@ -12,7 +12,7 @@
 namespace Sonatra\Component\Cache\Tests\Adapter;
 
 use PHPUnit\Framework\TestCase;
-use Sonatra\Component\Cache\Adapter\RedisAdapter;
+use Sonatra\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\CacheItem;
 
 /**
@@ -27,7 +27,7 @@ abstract class AbstractAdapterTest extends TestCase
     const PREFIX_GLOBAL = 'global';
 
     /**
-     * @var RedisAdapter
+     * @var AdapterInterface
      */
     protected $adapter;
 
