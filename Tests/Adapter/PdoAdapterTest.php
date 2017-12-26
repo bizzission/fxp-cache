@@ -29,7 +29,7 @@ class PdoAdapterTest extends AbstractAdapterTest
     protected function setUp()
     {
         if (!extension_loaded('pdo_sqlite')) {
-            throw new \PHPUnit_Framework_SkippedTestError('Extension pdo_sqlite required.');
+            $this->markTestSkipped('Extension pdo_sqlite required.');
         }
 
         $this->dbFile = tempnam(sys_get_temp_dir(), 'st_sqlite_cache');
