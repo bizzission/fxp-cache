@@ -7,8 +7,10 @@ This version of the library requires not dependence.
 
 ## Installation
 
+Tell composer to download the bundle by running the command:
+
 ``` bash
-$ php composer.phar require sonatra/cache
+$ composer require fxp/cache
 ```
 
 #### APC
@@ -24,7 +26,7 @@ If you want to use Memcached cache, you must install the Memcache PHP Extension.
 If you want to use Redis cache, you must install this dependency:
 
 ``` bash
-$ php composer.phar require 'predis/predis:0.8'
+$ composer require predis/predis
 ```
 
 ## Configuration
@@ -39,7 +41,7 @@ The Memcached PHP Extension must be enabled in `php.ini`
 
 ### Next Steps
 
-Now that you have completed the basic installation of the Sonatra Cache,
+Now that you have completed the basic installation of the Fxp Cache,
 you are ready to use this library.
 
 [Enjoy!](usage.md)

@@ -1,24 +1,24 @@
 <?php
 
 /*
- * This file is part of the Sonatra package.
+ * This file is part of the Fxp package.
  *
- * (c) François Pluchino <francois.pluchino@sonatra.com>
+ * (c) François Pluchino <francois.pluchino@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Component\Cache\Tests\Adapter;
+namespace Fxp\Component\Cache\Tests\Adapter;
 
-use Sonatra\Component\Cache\Adapter\NullAdapter;
-use Sonatra\Component\Cache\Adapter\TraceableAdapter;
+use Fxp\Component\Cache\Adapter\NullAdapter;
+use Fxp\Component\Cache\Adapter\TraceableAdapter;
 use Symfony\Component\Cache\Adapter\NullAdapter as SymfonyNullAdapter;
 
 /**
  * Traceable Cache Adapter Test.
  *
- * @author François Pluchino <francois.pluchino@sonatra.com>
+ * @author François Pluchino <francois.pluchino@gmail.com>
  */
 class TraceableAdapterTest extends AbstractAdapterTest
 {

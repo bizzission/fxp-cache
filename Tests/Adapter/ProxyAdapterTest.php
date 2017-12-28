@@ -1,23 +1,23 @@
 <?php
 
 /*
- * This file is part of the Sonatra package.
+ * This file is part of the Fxp package.
  *
- * (c) François Pluchino <francois.pluchino@sonatra.com>
+ * (c) François Pluchino <francois.pluchino@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Component\Cache\Tests\Adapter;
+namespace Fxp\Component\Cache\Tests\Adapter;
 
-use Sonatra\Component\Cache\Adapter\ArrayAdapter;
-use Sonatra\Component\Cache\Adapter\ProxyAdapter;
+use Fxp\Component\Cache\Adapter\ArrayAdapter;
+use Fxp\Component\Cache\Adapter\ProxyAdapter;
 
 /**
  * Proxy Cache Adapter Test.
  *
- * @author François Pluchino <francois.pluchino@sonatra.com>
+ * @author François Pluchino <francois.pluchino@gmail.com>
  */
 class ProxyAdapterTest extends AbstractAdapterTest
 {

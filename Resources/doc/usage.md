@@ -6,7 +6,7 @@ Usage
 ### Filesystem Cache initialisation
 
 ```php
-use Sonatra\Component\Cache\Adapter\FilesystemCache;
+use Fxp\Component\Cache\Adapter\FilesystemCache;
 
 $cache = FilesystemCache();
 //...
@@ -19,7 +19,7 @@ $cache = FilesystemCache();
 ##### Cache: clear by prefix
 
 ```php
-use Sonatra\Component\Cache\Adapter\FilesystemCache;
+use Fxp\Component\Cache\Adapter\FilesystemCache;
 
 $cache = FilesystemCache('my_custom_prefix');
 

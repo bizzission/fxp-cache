@@ -1,14 +1,14 @@
 {
-    "name": "sonatra/cache",
+    "name": "fxp/cache",
     "type": "library",
     "description": "Add extra features to Symfony PSR-6 Cache Component",
     "keywords": ["cache", "psr-6", "namespace", "prefix"],
-    "homepage": "https://github.com/sonatra/sonatra-cache",
+    "homepage": "https://github.com/fxpio/fxp-cache",
     "license": "MIT",
     "authors": [
         {
             "name": "François Pluchino",
-            "email": "francois.pluchino@sonatra.com"
+            "email": "francois.pluchino@gmail.com"
         }
     ],
     "minimum-stability": "stable",
@@ -23,7 +23,7 @@
         "predis/predis": "^1.1.0"
     },
     "autoload": {
-        "psr-4": { "Sonatra\\Component\\Cache\\": "" },
+        "psr-4": { "Fxp\\Component\\Cache\\": "" },
         "exclude-from-classmap": [
             "/Tests/"
         ]
