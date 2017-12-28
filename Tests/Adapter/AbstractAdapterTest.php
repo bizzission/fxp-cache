@@ -131,10 +131,10 @@ abstract class AbstractAdapterTest extends TestCase
 
     public function testClearByPrefixes()
     {
-        $prefixes = array(
+        $prefixes = [
             static::PREFIX_1,
             static::PREFIX_2,
-        );
+        ];
         $res = $this->adapter->clearByPrefixes($prefixes);
         $this->assertTrue($res);
     }

@@ -69,7 +69,7 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
     {
         $res = $client->getAllKeys();
 
-        return false !== $res ? $res : array();
+        return false !== $res ? $res : [];
     }
 
     /**

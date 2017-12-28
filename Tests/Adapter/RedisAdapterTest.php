@@ -29,7 +29,7 @@ class RedisAdapterTest extends AbstractAdapterTest
 
         $redisHost = 'localhost';
         $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 1, 'usec' => 0));
+        socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, ['sec' => 1, 'usec' => 0]);
         $result = @socket_connect($socket, $redisHost, 6379);
         socket_close($socket);
 
@@ -37,10 +37,10 @@ class RedisAdapterTest extends AbstractAdapterTest
             $this->markTestSkipped('Redis is not running');
         }
 
-        $redis = RedisAdapter::createConnection('redis://'.$redisHost.'/1', array(
+        $redis = RedisAdapter::createConnection('redis://'.$redisHost.'/1', [
             'class' => Client::class,
             'timeout' => 3,
-        ));
+        ]);
 
         $this->assertInstanceOf(Client::class, $redis);
 

@@ -24,10 +24,10 @@ class ChainAdapterTest extends AbstractAdapterTest
 {
     protected function setUp()
     {
-        $this->adapter = new ChainAdapter(array(
+        $this->adapter = new ChainAdapter([
             new SymfonyArrayAdapter(),
             new ArrayAdapter(),
-        ));
+        ]);
         $this->adapter->clear();
     }
 }

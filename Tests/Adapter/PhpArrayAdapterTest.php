@@ -66,10 +66,10 @@ class PhpArrayAdapterTest extends AbstractAdapterTest
 
     public function testWarmUp()
     {
-        $values = array(
+        $values = [
             self::PREFIX_1.'foo' => 'bar1',
             self::PREFIX_2.'foo' => 'bar2',
-        );
+        ];
 
         $this->assertFileNotExists(self::$file);
         $this->adapter->warmUp($values);

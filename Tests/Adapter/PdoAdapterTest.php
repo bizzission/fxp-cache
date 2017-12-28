@@ -35,10 +35,10 @@ class PdoAdapterTest extends AbstractAdapterTest
         $this->dbFile = tempnam(sys_get_temp_dir(), 'st_sqlite_cache');
 
         $this->adapter = new PdoAdapter(DriverManager::getConnection(
-            array(
+            [
                 'driver' => 'pdo_sqlite',
                 'path' => $this->dbFile,
-            )),
+            ]),
             '',
             0);
         $this->adapter->createTable();

@@ -27,10 +27,10 @@ class MemcachedAdapterTest extends AbstractAdapterTest
         }
 
         $client = new \Memcached();
-        $client->addServers(array(array(
+        $client->addServers([[
             getenv('MEMCACHED_HOST') ?: '127.0.0.1',
             getenv('MEMCACHED_PORT') ?: 11211,
-        )));
+        ]]);
 
         $this->adapter = new MemcachedAdapter($client, str_replace('\\', '.', __CLASS__), 0);
         $this->adapter->clear();

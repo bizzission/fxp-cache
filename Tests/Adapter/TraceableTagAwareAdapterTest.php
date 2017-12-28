@@ -53,10 +53,10 @@ class TraceableTagAwareAdapterTest extends AbstractAdapterTest
         $symfonyAdapter = $this->getMockBuilder(SymfonyTagAwareInterface::class)->getMock();
         $this->mockAdapter($symfonyAdapter);
 
-        return array(
-            array(new TraceableTagAwareAdapter($this->getTagAwareAdapter())),
-            array(new TraceableTagAwareAdapter($symfonyAdapter)),
-        );
+        return [
+            [new TraceableTagAwareAdapter($this->getTagAwareAdapter())],
+            [new TraceableTagAwareAdapter($symfonyAdapter)],
+        ];
     }
 
     /**
@@ -77,7 +77,7 @@ class TraceableTagAwareAdapterTest extends AbstractAdapterTest
      */
     public function testClearByPrefixesWithDifferentAdapter(TraceableTagAwareAdapter $adapter)
     {
-        $res = $adapter->clearByPrefixes(array(static::PREFIX_1, static::PREFIX_2));
+        $res = $adapter->clearByPrefixes([static::PREFIX_1, static::PREFIX_2]);
         $this->assertTrue($res);
     }
 
@@ -120,7 +120,7 @@ class TraceableTagAwareAdapterTest extends AbstractAdapterTest
         $adapter->expects($this->any())
             ->method('getItems')
             ->willReturnCallback(function ($values) use ($self) {
-                $res = array();
+                $res = [];
 
                 foreach ($values as $value) {
                     $item = $self->getMockBuilder(CacheItemInterface::class)->getMock();

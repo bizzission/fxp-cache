@@ -48,7 +48,7 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
      */
     private function doClearFile(&$ok, \SplFileInfo $file, $prefix)
     {
-        $keys = array();
+        $keys = [];
 
         if ($file->isFile()) {
             $key = $this->getFileKey($file);

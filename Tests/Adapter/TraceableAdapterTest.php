@@ -42,10 +42,10 @@ class TraceableAdapterTest extends AbstractAdapterTest
 
     public function getAdapters()
     {
-        return array(
-            array(new TraceableAdapter(new NullAdapter())),
-            array(new TraceableAdapter(new SymfonyNullAdapter())),
-        );
+        return [
+            [new TraceableAdapter(new NullAdapter())],
+            [new TraceableAdapter(new SymfonyNullAdapter())],
+        ];
     }
 
     /**
@@ -66,7 +66,7 @@ class TraceableAdapterTest extends AbstractAdapterTest
      */
     public function testClearByPrefixesWithDifferentAdapter(TraceableAdapter $adapter)
     {
-        $res = $adapter->clearByPrefixes(array(static::PREFIX_1, static::PREFIX_2));
+        $res = $adapter->clearByPrefixes([static::PREFIX_1, static::PREFIX_2]);
         $this->assertTrue($res);
     }
 }

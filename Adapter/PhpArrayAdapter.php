@@ -48,7 +48,7 @@ class PhpArrayAdapter extends BasePhpArrayAdapter implements AdapterInterface
 
         if (null === $values) {
             $file = AdapterUtil::getPropertyValue($this, 'file');
-            $values = @(include $file) ?: array();
+            $values = @(include $file) ?: [];
 
             AdapterUtil::setPropertyValue($this, 'values', $values);
         }

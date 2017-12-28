@@ -25,6 +25,6 @@ trait AdapterPrefixesTrait
      */
     public function clearByPrefix($prefix)
     {
-        return $this->clearByPrefixes(array($prefix));
+        return $this->clearByPrefixes([$prefix]);
     }
 }
