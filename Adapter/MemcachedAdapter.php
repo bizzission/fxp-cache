@@ -32,7 +32,7 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
         $version = AdapterUtil::getPropertyValue($this, 'namespaceVersion');
 
         foreach ($this->getAllItems($client) as $key) {
-            $ok = !$this->doClearItem($key, $namespace.$version.$prefix) && $ok ? false : $ok;
+            $ok = !$this->doClearItem(urldecode($key), $namespace.$version.$prefix) && $ok ? false : $ok;
         }
 
         return $ok;
