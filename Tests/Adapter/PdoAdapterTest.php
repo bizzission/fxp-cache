@@ -28,7 +28,7 @@ class PdoAdapterTest extends AbstractAdapterTest
 
     protected function setUp()
     {
-        if (!extension_loaded('pdo_sqlite')) {
+        if (!\extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('Extension pdo_sqlite required.');
         }
 
