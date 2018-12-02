@@ -44,12 +44,14 @@ class PhpArrayAdapter extends BasePhpArrayAdapter implements AdapterInterface
      */
     private function initializeForPrefix()
     {
+        $keys = AdapterUtil::getPropertyValue($this, 'keys');
         $values = AdapterUtil::getPropertyValue($this, 'values');
 
         if (null === $values) {
             $file = AdapterUtil::getPropertyValue($this, 'file');
             $values = @(include $file) ?: [];
 
+            AdapterUtil::setPropertyValue($this, 'keys', $keys);
             AdapterUtil::setPropertyValue($this, 'values', $values);
         }
     }
@@ -65,20 +67,20 @@ class PhpArrayAdapter extends BasePhpArrayAdapter implements AdapterInterface
     private function clearItems(AdapterInterface $fallbackPool, array $prefixes)
     {
         $cleared = $fallbackPool->clearByPrefixes($prefixes);
-        $values = AdapterUtil::getPropertyValue($this, 'values');
-        $save = false;
+        $keys = AdapterUtil::getPropertyValue($this, 'keys') ?: [];
+        $values = AdapterUtil::getPropertyValue($this, 'values') ?: [];
+        $warmValues = [];
 
-        foreach ($values as $key => $value) {
+        foreach ($keys as $key => $valuePrefix) {
             foreach ($prefixes as $prefix) {
-                if ('' !== $prefix && 0 === strpos($key, $prefix)) {
-                    unset($values[$key]);
-                    $save = true;
+                if ('' === $prefix || 0 !== strpos($key, $prefix)) {
+                    $warmValues[$key] = $values[$valuePrefix];
                 }
             }
         }
 
-        if ($save) {
-            $this->warmUp($values);
+        if (\count($values) !== \count($warmValues)) {
+            $this->warmUp($warmValues);
         }
 
         return $cleared;
