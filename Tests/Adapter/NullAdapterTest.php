@@ -19,7 +19,6 @@ use Fxp\Component\Cache\Adapter\NullAdapter;
  * @author François Pluchino <francois.pluchino@gmail.com>
  *
  * @internal
- * @coversNothing
  */
 final class NullAdapterTest extends AbstractAdapterTest
 {

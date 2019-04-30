@@ -20,7 +20,6 @@ use Fxp\Component\Cache\Adapter\ProxyAdapter;
  * @author François Pluchino <francois.pluchino@gmail.com>
  *
  * @internal
- * @coversNothing
  */
 final class ProxyAdapterTest extends AbstractAdapterTest
 {

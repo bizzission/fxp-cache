@@ -21,7 +21,6 @@ use Symfony\Component\Cache\Simple\FilesystemCache;
  * @author François Pluchino <francois.pluchino@gmail.com>
  *
  * @internal
- * @coversNothing
  */
 final class SimpleAdapterTest extends AbstractAdapterTest
 {

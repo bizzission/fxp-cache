@@ -22,7 +22,6 @@ use Symfony\Component\Filesystem\Filesystem;
  * @author François Pluchino <francois.pluchino@gmail.com>
  *
  * @internal
- * @coversNothing
  */
 final class DoctrineAdapterTest extends AbstractAdapterTest
 {

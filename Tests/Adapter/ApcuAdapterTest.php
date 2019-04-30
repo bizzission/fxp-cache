@@ -19,7 +19,6 @@ use Fxp\Component\Cache\Adapter\ApcuAdapter;
  * @author François Pluchino <francois.pluchino@gmail.com>
  *
  * @internal
- * @coversNothing
  */
 final class ApcuAdapterTest extends AbstractAdapterTest
 {

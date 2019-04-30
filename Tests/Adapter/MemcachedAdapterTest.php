@@ -19,7 +19,6 @@ use Fxp\Component\Cache\Adapter\MemcachedAdapter;
  * @author François Pluchino <francois.pluchino@gmail.com>
  *
  * @internal
- * @coversNothing
  */
 final class MemcachedAdapterTest extends AbstractAdapterTest
 {

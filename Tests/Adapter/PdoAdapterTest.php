@@ -20,7 +20,6 @@ use Fxp\Component\Cache\Adapter\PdoAdapter;
  * @author François Pluchino <francois.pluchino@gmail.com>
  *
  * @internal
- * @coversNothing
  */
 final class PdoAdapterTest extends AbstractAdapterTest
 {
@@ -39,10 +38,10 @@ final class PdoAdapterTest extends AbstractAdapterTest
 
         $this->adapter = new PdoAdapter(
             DriverManager::getConnection(
-            [
-                'driver' => 'pdo_sqlite',
-                'path' => $this->dbFile,
-            ]
+                [
+                    'driver' => 'pdo_sqlite',
+                    'path' => $this->dbFile,
+                ]
         ),
             '',
             0

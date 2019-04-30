@@ -20,7 +20,6 @@ use Predis\Client;
  * @author François Pluchino <francois.pluchino@gmail.com>
  *
  * @internal
- * @coversNothing
  */
 final class RedisAdapterTest extends AbstractAdapterTest
 {

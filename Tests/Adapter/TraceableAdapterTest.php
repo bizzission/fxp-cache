@@ -21,7 +21,6 @@ use Symfony\Component\Cache\Adapter\NullAdapter as SymfonyNullAdapter;
  * @author François Pluchino <francois.pluchino@gmail.com>
  *
  * @internal
- * @coversNothing
  */
 final class TraceableAdapterTest extends AbstractAdapterTest
 {

@@ -22,7 +22,6 @@ use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface as SymfonyTagAwareI
  * @author François Pluchino <francois.pluchino@gmail.com>
  *
  * @internal
- * @coversNothing
  */
 final class TraceableTagAwareAdapterTest extends AbstractAdapterTest
 {
