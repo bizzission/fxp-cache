@@ -17,10 +17,13 @@ use Fxp\Component\Cache\Adapter\ArrayAdapter;
  * Array Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class ArrayAdapterTest extends AbstractAdapterTest
+final class ArrayAdapterTest extends AbstractAdapterTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new ArrayAdapter(0);
         $this->adapter->clear();

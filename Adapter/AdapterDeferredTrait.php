@@ -23,7 +23,7 @@ trait AdapterDeferredTrait
      *
      * @param string[] $prefixes The prefixes
      */
-    protected function clearDeferredByPrefixes(array $prefixes)
+    protected function clearDeferredByPrefixes(array $prefixes): void
     {
         $deferred = AdapterUtil::getPropertyValue($this, 'deferred');
 

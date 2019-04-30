@@ -17,10 +17,13 @@ use Fxp\Component\Cache\Adapter\MemcachedAdapter;
  * Memcached Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class MemcachedAdapterTest extends AbstractAdapterTest
+final class MemcachedAdapterTest extends AbstractAdapterTest
 {
-    public function setUp()
+    protected function setUp(): void
     {
         if (!MemcachedAdapter::isSupported()) {
             $this->markTestSkipped('Extension memcached >=2.2.0 required.');

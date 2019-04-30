@@ -28,7 +28,7 @@ class ProxyAdapter extends BaseProxyAdapter implements AdapterInterface
      */
     public function clearByPrefixes(array $prefixes)
     {
-        /* @var AdapterInterface|CacheItemPoolInterface $pool */
+        /** @var AdapterInterface|CacheItemPoolInterface $pool */
         $pool = AdapterUtil::getPropertyValue($this, 'pool');
 
         return $pool instanceof AdapterInterface

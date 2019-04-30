@@ -19,14 +19,12 @@ use Symfony\Component\Filesystem\Filesystem;
  * PHP Array Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class PhpArrayAdapterTest extends AbstractAdapterTest
+final class PhpArrayAdapterTest extends AbstractAdapterTest
 {
-    /**
-     * @var string
-     */
-    private static $file;
-
     /**
      * @var PhpArrayAdapter
      */
@@ -36,13 +34,17 @@ class PhpArrayAdapterTest extends AbstractAdapterTest
      * @var Filesystem
      */
     protected $fs;
+    /**
+     * @var string
+     */
+    private static $file;
 
-    public static function setupBeforeClass()
+    public static function setupBeforeClass(): void
     {
         self::$file = sys_get_temp_dir().'/symfony-cache/php-array-adapter-test.php';
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->fs = new Filesystem();
         $this->adapter = new PhpArrayAdapter(self::$file, new ArrayAdapter());
@@ -51,12 +53,12 @@ class PhpArrayAdapterTest extends AbstractAdapterTest
         $this->fs->remove(sys_get_temp_dir().'/symfony-cache');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->fs->remove(sys_get_temp_dir().'/symfony-cache');
     }
 
-    public function testInitialization()
+    public function testInitialization(): void
     {
         $this->adapter = new PhpArrayAdapter(self::$file, new ArrayAdapter());
         $this->adapter->clearByPrefix('foo');
@@ -64,7 +66,7 @@ class PhpArrayAdapterTest extends AbstractAdapterTest
         $this->assertFalse($this->adapter->hasItem('foo_bar'));
     }
 
-    public function testWarmUp()
+    public function testWarmUp(): void
     {
         $values = [
             self::PREFIX_1.'foo' => 'bar1',

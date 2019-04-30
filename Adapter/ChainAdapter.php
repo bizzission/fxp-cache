@@ -28,7 +28,7 @@ class ChainAdapter extends BaseChainAdapter implements AdapterInterface
      */
     public function clearByPrefixes(array $prefixes)
     {
-        /* @var BaseAdapterInterface[] $adapters */
+        /** @var BaseAdapterInterface[] $adapters */
         $adapters = AdapterUtil::getPropertyValue($this, 'adapters');
         $cleared = true;
 

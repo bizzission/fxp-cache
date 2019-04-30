@@ -22,23 +22,23 @@ use Symfony\Component\Cache\CacheItem;
  */
 abstract class AbstractAdapterTest extends TestCase
 {
-    const PREFIX_1 = 'prefix1_';
-    const PREFIX_2 = 'prefix2_';
-    const PREFIX_GLOBAL = 'global';
+    public const PREFIX_1 = 'prefix1_';
+    public const PREFIX_2 = 'prefix2_';
+    public const PREFIX_GLOBAL = 'global';
 
     /**
      * @var AdapterInterface
      */
     protected $adapter;
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (null !== $this->adapter) {
             $this->adapter->clear();
         }
     }
 
-    public function testClearByPrefix()
+    public function testClearByPrefix(): void
     {
         $key1 = static::PREFIX_1.'foo';
         $value1 = 'bar';
@@ -89,7 +89,7 @@ abstract class AbstractAdapterTest extends TestCase
         $this->assertTrue($this->adapter->hasItem($key2));
     }
 
-    public function testClearByPrefixWithDeferredItem()
+    public function testClearByPrefixWithDeferredItem(): void
     {
         $key1 = static::PREFIX_1.'foo';
         $value1 = 'bar';
@@ -129,7 +129,7 @@ abstract class AbstractAdapterTest extends TestCase
         $this->assertFalse($this->adapter->hasItem($key2));
     }
 
-    public function testClearByPrefixes()
+    public function testClearByPrefixes(): void
     {
         $prefixes = [
             static::PREFIX_1,

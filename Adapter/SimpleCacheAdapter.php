@@ -31,7 +31,7 @@ class SimpleCacheAdapter extends BaseSimpleCacheAdapter implements AdapterInterf
     {
         $this->clearDeferredByPrefixes($prefixes);
 
-        /* @var CacheInterface $pool */
+        /** @var CacheInterface $pool */
         $pool = AdapterUtil::getPropertyValue($this, 'pool');
 
         return $pool->clear();

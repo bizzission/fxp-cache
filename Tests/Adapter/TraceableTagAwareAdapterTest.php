@@ -20,28 +20,31 @@ use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface as SymfonyTagAwareI
  * Traceable Tag Aware Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class TraceableTagAwareAdapterTest extends AbstractAdapterTest
+final class TraceableTagAwareAdapterTest extends AbstractAdapterTest
 {
     /**
-     * @var TagAwareAdapterInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|TagAwareAdapterInterface
      */
     protected $tagAwareAdapter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tagAwareAdapter = $this->getTagAwareAdapter();
         $this->adapter = new TraceableTagAwareAdapter($this->tagAwareAdapter);
         $this->adapter->clear();
     }
 
-    public function testClearByPrefix()
+    public function testClearByPrefix(): void
     {
         $res = $this->adapter->clearByPrefix(static::PREFIX_1);
         $this->assertTrue($res);
     }
 
-    public function testClearByPrefixWithDeferredItem()
+    public function testClearByPrefixWithDeferredItem(): void
     {
         $res = $this->adapter->clearByPrefix(static::PREFIX_1);
         $this->assertTrue($res);
@@ -49,7 +52,7 @@ class TraceableTagAwareAdapterTest extends AbstractAdapterTest
 
     public function getAdapters()
     {
-        /* @var SymfonyTagAwareInterface|\PHPUnit_Framework_MockObject_MockObject $symfonyAdapter */
+        /** @var \PHPUnit_Framework_MockObject_MockObject|SymfonyTagAwareInterface $symfonyAdapter */
         $symfonyAdapter = $this->getMockBuilder(SymfonyTagAwareInterface::class)->getMock();
         $this->mockAdapter($symfonyAdapter);
 
@@ -64,7 +67,7 @@ class TraceableTagAwareAdapterTest extends AbstractAdapterTest
      *
      * @param TraceableTagAwareAdapter $adapter The adapter
      */
-    public function testClearByPrefixWithDifferentAdapter(TraceableTagAwareAdapter $adapter)
+    public function testClearByPrefixWithDifferentAdapter(TraceableTagAwareAdapter $adapter): void
     {
         $res = $adapter->clearByPrefix(static::PREFIX_1);
         $this->assertTrue($res);
@@ -75,14 +78,14 @@ class TraceableTagAwareAdapterTest extends AbstractAdapterTest
      *
      * @param TraceableTagAwareAdapter $adapter The adapter
      */
-    public function testClearByPrefixesWithDifferentAdapter(TraceableTagAwareAdapter $adapter)
+    public function testClearByPrefixesWithDifferentAdapter(TraceableTagAwareAdapter $adapter): void
     {
         $res = $adapter->clearByPrefixes([static::PREFIX_1, static::PREFIX_2]);
         $this->assertTrue($res);
     }
 
     /**
-     * @return TagAwareAdapterInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit_Framework_MockObject_MockObject|TagAwareAdapterInterface
      */
     private function getTagAwareAdapter()
     {
@@ -91,11 +94,13 @@ class TraceableTagAwareAdapterTest extends AbstractAdapterTest
 
         $tagAwareAdapter->expects($this->any())
             ->method('clearByPrefix')
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $tagAwareAdapter->expects($this->any())
             ->method('clearByPrefixes')
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         return $tagAwareAdapter;
     }
@@ -103,7 +108,7 @@ class TraceableTagAwareAdapterTest extends AbstractAdapterTest
     /**
      * @param \PHPUnit_Framework_MockObject_MockObject $adapter The mocked adapter
      */
-    private function mockAdapter($adapter)
+    private function mockAdapter($adapter): void
     {
         $self = $this;
         $adapter->expects($this->any())
@@ -112,10 +117,12 @@ class TraceableTagAwareAdapterTest extends AbstractAdapterTest
                 $item = $self->getMockBuilder(CacheItemInterface::class)->getMock();
                 $item->expects($this->any())
                     ->method('getKey')
-                    ->willReturn($value);
+                    ->willReturn($value)
+                ;
 
                 return $item;
-            });
+            })
+        ;
 
         $adapter->expects($this->any())
             ->method('getItems')
@@ -126,40 +133,49 @@ class TraceableTagAwareAdapterTest extends AbstractAdapterTest
                     $item = $self->getMockBuilder(CacheItemInterface::class)->getMock();
                     $item->expects($this->any())
                         ->method('getKey')
-                        ->willReturn($value);
+                        ->willReturn($value)
+                    ;
 
                     $res[] = $item;
                 }
 
                 return $res;
-            });
+            })
+        ;
 
         $adapter->expects($this->any())
             ->method('hasItem')
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $adapter->expects($this->any())
             ->method('clear')
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $adapter->expects($this->any())
             ->method('deleteItem')
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $adapter->expects($this->any())
             ->method('deleteItems')
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $adapter->expects($this->any())
             ->method('save')
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $adapter->expects($this->any())
             ->method('saveDeferred')
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $adapter->expects($this->any())
             ->method('commit')
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
     }
 }

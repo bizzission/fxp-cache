@@ -18,10 +18,13 @@ use Predis\Client;
  * Redis Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class RedisAdapterTest extends AbstractAdapterTest
+final class RedisAdapterTest extends AbstractAdapterTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!class_exists('\Predis\Client', true)) {
             $this->markTestSkipped('Predis is not installed');

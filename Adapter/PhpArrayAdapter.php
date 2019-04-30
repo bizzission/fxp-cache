@@ -30,19 +30,18 @@ class PhpArrayAdapter extends BasePhpArrayAdapter implements AdapterInterface
     {
         $this->initializeForPrefix();
 
-        /* @var BaseAdapterInterface|AdapterInterface $fallbackPool */
+        /** @var AdapterInterface|BaseAdapterInterface $fallbackPool */
         $fallbackPool = AdapterUtil::getPropertyValue($this, 'pool');
-        $cleared = $fallbackPool instanceof AdapterInterface
+
+        return $fallbackPool instanceof AdapterInterface
             ? $this->clearItems($fallbackPool, $prefixes)
             : $this->clear();
-
-        return $cleared;
     }
 
     /**
      * Load the cache file.
      */
-    private function initializeForPrefix()
+    private function initializeForPrefix(): void
     {
         $keys = AdapterUtil::getPropertyValue($this, 'keys');
         $values = AdapterUtil::getPropertyValue($this, 'values');

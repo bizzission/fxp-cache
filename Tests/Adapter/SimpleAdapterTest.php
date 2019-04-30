@@ -19,16 +19,19 @@ use Symfony\Component\Cache\Simple\FilesystemCache;
  * Simple Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class SimpleAdapterTest extends AbstractAdapterTest
+final class SimpleAdapterTest extends AbstractAdapterTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new SimpleCacheAdapter(new FilesystemCache(), '', 0);
         $this->adapter->clear();
     }
 
-    public function testClearByPrefix()
+    public function testClearByPrefix(): void
     {
         $key1 = static::PREFIX_1.'foo';
         $value1 = 'bar';
@@ -79,7 +82,7 @@ class SimpleAdapterTest extends AbstractAdapterTest
         $this->assertFalse($this->adapter->hasItem($key2));
     }
 
-    public function testClearByPrefixWithDeferredItem()
+    public function testClearByPrefixWithDeferredItem(): void
     {
         $key1 = static::PREFIX_1.'foo';
         $value1 = 'bar';

@@ -17,22 +17,25 @@ use Fxp\Component\Cache\Adapter\NullAdapter;
  * Null Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class NullAdapterTest extends AbstractAdapterTest
+final class NullAdapterTest extends AbstractAdapterTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new NullAdapter();
         $this->adapter->clear();
     }
 
-    public function testClearByPrefix()
+    public function testClearByPrefix(): void
     {
         $res = $this->adapter->clearByPrefix(static::PREFIX_1);
         $this->assertTrue($res);
     }
 
-    public function testClearByPrefixWithDeferredItem()
+    public function testClearByPrefixWithDeferredItem(): void
     {
         $res = $this->adapter->clearByPrefix(static::PREFIX_1);
         $this->assertTrue($res);

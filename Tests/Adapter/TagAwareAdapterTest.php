@@ -19,10 +19,13 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter as SymfonyArrayAdapter;
  * Tag Aware Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class TagAwareAdapterTest extends AbstractAdapterTest
+final class TagAwareAdapterTest extends AbstractAdapterTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new TagAwareAdapter(new ArrayAdapter(), new SymfonyArrayAdapter());
         $this->adapter->clear();

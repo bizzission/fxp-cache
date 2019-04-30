@@ -19,10 +19,19 @@ use Symfony\Component\Filesystem\Filesystem;
  * Php Files Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class PhpFilesAdapterTest extends AbstractAdapterTest
+final class PhpFilesAdapterTest extends AbstractAdapterTest
 {
-    protected function setUp()
+    public static function tearDownAfterClass(): void
+    {
+        $fs = new Filesystem();
+        $fs->remove(sys_get_temp_dir().'/symfony-cache');
+    }
+
+    protected function setUp(): void
     {
         if (!PhpFilesAdapter::isSupported()) {
             $this->markTestSkipped('OPcache is not enabled');
@@ -32,13 +41,7 @@ class PhpFilesAdapterTest extends AbstractAdapterTest
         $this->adapter->clear();
     }
 
-    public static function tearDownAfterClass()
-    {
-        $fs = new Filesystem();
-        $fs->remove(sys_get_temp_dir().'/symfony-cache');
-    }
-
-    public function testClearByPrefix()
+    public function testClearByPrefix(): void
     {
         $key1 = static::PREFIX_1.'foo';
         $value1 = 'bar';
@@ -89,7 +92,7 @@ class PhpFilesAdapterTest extends AbstractAdapterTest
         $this->assertFalse($this->adapter->hasItem($key2));
     }
 
-    public function testClearByPrefixWithDeferredItem()
+    public function testClearByPrefixWithDeferredItem(): void
     {
         $key1 = static::PREFIX_1.'foo';
         $value1 = 'bar';

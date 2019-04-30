@@ -19,10 +19,13 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter as SymfonyArrayAdapter;
  * Chain Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class ChainAdapterTest extends AbstractAdapterTest
+final class ChainAdapterTest extends AbstractAdapterTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new ChainAdapter([
             new SymfonyArrayAdapter(),

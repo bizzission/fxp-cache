@@ -25,7 +25,7 @@ abstract class AdapterUtil
      * @param string $property The property name
      * @param mixed  $value    The value
      */
-    public static function setPropertyValue($object, $property, $value)
+    public static function setPropertyValue($object, $property, $value): void
     {
         $ref = new \ReflectionClass($object);
         $prop = static::getPrivateProperty($ref, $property);

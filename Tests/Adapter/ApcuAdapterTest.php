@@ -17,10 +17,13 @@ use Fxp\Component\Cache\Adapter\ApcuAdapter;
  * Apcu Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class ApcuAdapterTest extends AbstractAdapterTest
+final class ApcuAdapterTest extends AbstractAdapterTest
 {
-    public function setUp()
+    protected function setUp(): void
     {
         if (!\function_exists('apcu_fetch') || !ini_get('apc.enabled') || ('cli' === \PHP_SAPI && !ini_get('apc.enable_cli'))) {
             $this->markTestSkipped('APCu extension is required.');

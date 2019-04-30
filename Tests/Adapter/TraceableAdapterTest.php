@@ -19,22 +19,25 @@ use Symfony\Component\Cache\Adapter\NullAdapter as SymfonyNullAdapter;
  * Traceable Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class TraceableAdapterTest extends AbstractAdapterTest
+final class TraceableAdapterTest extends AbstractAdapterTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new TraceableAdapter(new NullAdapter());
         $this->adapter->clear();
     }
 
-    public function testClearByPrefix()
+    public function testClearByPrefix(): void
     {
         $res = $this->adapter->clearByPrefix(static::PREFIX_1);
         $this->assertTrue($res);
     }
 
-    public function testClearByPrefixWithDeferredItem()
+    public function testClearByPrefixWithDeferredItem(): void
     {
         $res = $this->adapter->clearByPrefix(static::PREFIX_1);
         $this->assertTrue($res);
@@ -53,7 +56,7 @@ class TraceableAdapterTest extends AbstractAdapterTest
      *
      * @param TraceableAdapter $adapter The adapter
      */
-    public function testClearByPrefixWithDifferentAdapter(TraceableAdapter $adapter)
+    public function testClearByPrefixWithDifferentAdapter(TraceableAdapter $adapter): void
     {
         $res = $adapter->clearByPrefix(static::PREFIX_1);
         $this->assertTrue($res);
@@ -64,7 +67,7 @@ class TraceableAdapterTest extends AbstractAdapterTest
      *
      * @param TraceableAdapter $adapter The adapter
      */
-    public function testClearByPrefixesWithDifferentAdapter(TraceableAdapter $adapter)
+    public function testClearByPrefixesWithDifferentAdapter(TraceableAdapter $adapter): void
     {
         $res = $adapter->clearByPrefixes([static::PREFIX_1, static::PREFIX_2]);
         $this->assertTrue($res);

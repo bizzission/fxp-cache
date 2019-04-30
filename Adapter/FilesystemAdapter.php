@@ -30,9 +30,11 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
         $ok = true;
         $directory = AdapterUtil::getPropertyValue($this, 'directory');
 
-        /* @var \SplFileInfo $file */
-        foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory,
-                \FilesystemIterator::SKIP_DOTS)) as $file) {
+        /** @var \SplFileInfo $file */
+        foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(
+            $directory,
+            \FilesystemIterator::SKIP_DOTS
+        )) as $file) {
             $this->doClearFile($ok, $file, $prefix);
         }
 
@@ -46,7 +48,7 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
      * @param \SplFileInfo $file   The spl file info
      * @param string       $prefix The prefix
      */
-    private function doClearFile(&$ok, \SplFileInfo $file, $prefix)
+    private function doClearFile(&$ok, \SplFileInfo $file, $prefix): void
     {
         $keys = [];
 
@@ -66,13 +68,13 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
      *
      * @param \SplFileInfo $file The spl file info
      *
-     * @return string|null
+     * @return null|string
      */
     private function getFileKey(\SplFileInfo $file)
     {
         $key = null;
 
-        if ($h = @fopen($file, 'rb')) {
+        if ($h = @fopen($file, 'r')) {
             rawurldecode(rtrim(fgets($h)));
             $value = stream_get_contents($h);
             fclose($h);

@@ -18,18 +18,21 @@ use Symfony\Component\Filesystem\Filesystem;
  * Filesystem Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class FilesystemAdapterTest extends AbstractAdapterTest
+final class FilesystemAdapterTest extends AbstractAdapterTest
 {
-    protected function setUp()
-    {
-        $this->adapter = new FilesystemAdapter('', 0);
-        $this->adapter->clear();
-    }
-
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         $fs = new Filesystem();
         $fs->remove(sys_get_temp_dir().'/symfony-cache');
+    }
+
+    protected function setUp(): void
+    {
+        $this->adapter = new FilesystemAdapter('', 0);
+        $this->adapter->clear();
     }
 }

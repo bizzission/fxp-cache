@@ -18,15 +18,18 @@ use Fxp\Component\Cache\Adapter\PdoAdapter;
  * Pdo Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class PdoAdapterTest extends AbstractAdapterTest
+final class PdoAdapterTest extends AbstractAdapterTest
 {
     /**
      * @var string
      */
     protected $dbFile;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!\extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('Extension pdo_sqlite required.');
@@ -34,18 +37,21 @@ class PdoAdapterTest extends AbstractAdapterTest
 
         $this->dbFile = tempnam(sys_get_temp_dir(), 'st_sqlite_cache');
 
-        $this->adapter = new PdoAdapter(DriverManager::getConnection(
+        $this->adapter = new PdoAdapter(
+            DriverManager::getConnection(
             [
                 'driver' => 'pdo_sqlite',
                 'path' => $this->dbFile,
-            ]),
+            ]
+        ),
             '',
-            0);
+            0
+        );
         $this->adapter->createTable();
         $this->adapter->clear();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         @unlink($this->dbFile);
     }

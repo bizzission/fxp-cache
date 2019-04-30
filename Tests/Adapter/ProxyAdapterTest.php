@@ -18,10 +18,13 @@ use Fxp\Component\Cache\Adapter\ProxyAdapter;
  * Proxy Cache Adapter Test.
  *
  * @author François Pluchino <francois.pluchino@gmail.com>
+ *
+ * @internal
+ * @coversNothing
  */
-class ProxyAdapterTest extends AbstractAdapterTest
+final class ProxyAdapterTest extends AbstractAdapterTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new ProxyAdapter(new ArrayAdapter(), '', 0);
         $this->adapter->clear();
