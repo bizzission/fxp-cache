@@ -25,7 +25,7 @@ class DoctrineAdapter extends BaseDoctrineAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefixes(array $prefixes)
+    public function clearByPrefixes(array $prefixes): bool
     {
         return $this->clear();
     }

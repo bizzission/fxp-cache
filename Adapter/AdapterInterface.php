@@ -27,7 +27,7 @@ interface AdapterInterface extends BaseAdapterInterface
      *
      * @return bool True if the pool was successfully cleared. False if there was an error
      */
-    public function clearByPrefix($prefix);
+    public function clearByPrefix(string $prefix): bool;
 
     /**
      * Deletes all items identified by the prefixes in the pool.
@@ -36,5 +36,5 @@ interface AdapterInterface extends BaseAdapterInterface
      *
      * @return bool True if the pool was successfully cleared. False if there was an error
      */
-    public function clearByPrefixes(array $prefixes);
+    public function clearByPrefixes(array $prefixes): bool;
 }

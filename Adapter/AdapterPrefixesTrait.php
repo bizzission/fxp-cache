@@ -23,7 +23,7 @@ trait AdapterPrefixesTrait
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefix($prefix)
+    public function clearByPrefix(string $prefix): bool
     {
         return $this->clearByPrefixes([$prefix]);
     }

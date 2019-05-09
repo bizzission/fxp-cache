@@ -27,7 +27,7 @@ class SimpleCacheAdapter extends BaseSimpleCacheAdapter implements AdapterInterf
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefixes(array $prefixes)
+    public function clearByPrefixes(array $prefixes): bool
     {
         $this->clearDeferredByPrefixes($prefixes);
 

@@ -24,8 +24,10 @@ abstract class AdapterUtil
      * @param object $object   The object
      * @param string $property The property name
      * @param mixed  $value    The value
+     *
+     * @throws
      */
-    public static function setPropertyValue($object, $property, $value): void
+    public static function setPropertyValue($object, string $property, $value): void
     {
         $ref = new \ReflectionClass($object);
         $prop = static::getPrivateProperty($ref, $property);
@@ -40,9 +42,11 @@ abstract class AdapterUtil
      * @param object $object   The object
      * @param string $property The property name
      *
+     * @throws
+     *
      * @return mixed
      */
-    public static function getPropertyValue($object, $property)
+    public static function getPropertyValue($object, string $property)
     {
         $ref = new \ReflectionClass($object);
         $prop = static::getPrivateProperty($ref, $property);
@@ -59,9 +63,11 @@ abstract class AdapterUtil
      * @param \ReflectionClass $reflectionClass The reflection class
      * @param string           $property        The property name
      *
+     * @throws
+     *
      * @return \ReflectionProperty
      */
-    public static function getPrivateProperty(\ReflectionClass $reflectionClass, $property)
+    public static function getPrivateProperty(\ReflectionClass $reflectionClass, string $property): \ReflectionProperty
     {
         if (!$reflectionClass->hasProperty($property) && $reflectionClass->getParentClass()) {
             return static::getPrivateProperty($reflectionClass->getParentClass(), $property);

@@ -24,7 +24,7 @@ trait AdapterTrait
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefixes(array $prefixes)
+    public function clearByPrefixes(array $prefixes): bool
     {
         $this->clearDeferredByPrefixes($prefixes);
         $namespace = AdapterUtil::getPropertyValue($this, 'namespace');
@@ -45,5 +45,5 @@ trait AdapterTrait
      *
      * @return bool
      */
-    abstract protected function doClearByPrefix($namespace, $prefix);
+    abstract protected function doClearByPrefix(string $namespace, string $prefix): bool;
 }

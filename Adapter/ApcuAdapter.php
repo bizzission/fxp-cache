@@ -25,7 +25,7 @@ class ApcuAdapter extends BaseApcuAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    protected function doClearByPrefix($namespace, $prefix)
+    protected function doClearByPrefix(string $namespace, string $prefix): bool
     {
         $ok = true;
 
@@ -44,7 +44,7 @@ class ApcuAdapter extends BaseApcuAdapter implements AdapterInterface
      *
      * @return bool
      */
-    protected function doClearItem(array $item, $prefix)
+    protected function doClearItem(array $item, string $prefix): bool
     {
         $id = $item['info'];
         $key = substr($id, strrpos($id, ':') + 1);
@@ -62,7 +62,7 @@ class ApcuAdapter extends BaseApcuAdapter implements AdapterInterface
      *
      * @return array[]
      */
-    protected function getAllItems()
+    protected function getAllItems(): array
     {
         $info = apcu_cache_info();
 

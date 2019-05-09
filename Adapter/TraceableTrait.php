@@ -27,7 +27,7 @@ trait TraceableTrait
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefix($prefix)
+    public function clearByPrefix(string $prefix): bool
     {
         $event = $this->start(__FUNCTION__);
         $event->result['prefix'] = $prefix;
@@ -44,7 +44,7 @@ trait TraceableTrait
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefixes(array $prefixes)
+    public function clearByPrefixes(array $prefixes): bool
     {
         $event = $this->start(__FUNCTION__);
         $event->result['prefixes'] = $prefixes;

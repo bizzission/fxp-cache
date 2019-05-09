@@ -26,7 +26,7 @@ class PhpArrayAdapter extends BasePhpArrayAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefixes(array $prefixes)
+    public function clearByPrefixes(array $prefixes): bool
     {
         $this->initializeForPrefix();
 
@@ -63,7 +63,7 @@ class PhpArrayAdapter extends BasePhpArrayAdapter implements AdapterInterface
      *
      * @return bool
      */
-    private function clearItems(AdapterInterface $fallbackPool, array $prefixes)
+    private function clearItems(AdapterInterface $fallbackPool, array $prefixes): bool
     {
         $cleared = $fallbackPool->clearByPrefixes($prefixes);
         $keys = AdapterUtil::getPropertyValue($this, 'keys') ?: [];

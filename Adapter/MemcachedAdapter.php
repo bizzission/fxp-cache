@@ -25,7 +25,7 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    protected function doClearByPrefix($namespace, $prefix)
+    protected function doClearByPrefix(string $namespace, string $prefix): bool
     {
         $ok = true;
         $client = $this->getParentClient();
@@ -46,7 +46,7 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
      *
      * @return bool
      */
-    private function doClearItem($id, $prefix)
+    private function doClearItem(string $id, string $prefix): bool
     {
         $key = substr($id, strrpos($id, ':') + 1);
         $res = true;
@@ -65,7 +65,7 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
      *
      * @return string[]
      */
-    private function getAllItems(\Memcached $client)
+    private function getAllItems(\Memcached $client): array
     {
         $res = $client->getAllKeys();
 
@@ -77,10 +77,10 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
      *
      * @return \Memcached
      */
-    private function getParentClient()
+    private function getParentClient(): \Memcached
     {
         $client = AdapterUtil::getPropertyValue($this, 'client');
 
-        return null !== $client ? $client : AdapterUtil::getPropertyValue($this, 'lazyClient');
+        return $client ?? AdapterUtil::getPropertyValue($this, 'lazyClient');
     }
 }

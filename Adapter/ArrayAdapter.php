@@ -25,7 +25,7 @@ class ArrayAdapter extends BaseArrayAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function clearByPrefixes(array $prefixes)
+    public function clearByPrefixes(array $prefixes): bool
     {
         $values = AdapterUtil::getPropertyValue($this, 'values');
         $expiries = AdapterUtil::getPropertyValue($this, 'expiries');

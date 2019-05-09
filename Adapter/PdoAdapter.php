@@ -25,7 +25,7 @@ class PdoAdapter extends BasePdoAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    protected function doClearByPrefix($namespace, $prefix)
+    protected function doClearByPrefix(string $namespace, string $prefix): bool
     {
         return $this->doClear($namespace.$prefix);
     }

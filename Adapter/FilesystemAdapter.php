@@ -25,7 +25,7 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
     /**
      * {@inheritdoc}
      */
-    protected function doClearByPrefix($namespace, $prefix)
+    protected function doClearByPrefix(string $namespace, string $prefix): bool
     {
         $ok = true;
         $directory = AdapterUtil::getPropertyValue($this, 'directory');
@@ -48,7 +48,7 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
      * @param \SplFileInfo $file   The spl file info
      * @param string       $prefix The prefix
      */
-    private function doClearFile(&$ok, \SplFileInfo $file, $prefix): void
+    private function doClearFile(bool &$ok, \SplFileInfo $file, string $prefix): void
     {
         $keys = [];
 
@@ -70,7 +70,7 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
      *
      * @return null|string
      */
-    private function getFileKey(\SplFileInfo $file)
+    private function getFileKey(\SplFileInfo $file): ?string
     {
         $key = null;
 
