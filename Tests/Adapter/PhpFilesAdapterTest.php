@@ -30,6 +30,9 @@ final class PhpFilesAdapterTest extends AbstractAdapterTest
         $fs->remove(sys_get_temp_dir().'/symfony-cache');
     }
 
+    /**
+     * @throws
+     */
     protected function setUp(): void
     {
         if (!PhpFilesAdapter::isSupported()) {

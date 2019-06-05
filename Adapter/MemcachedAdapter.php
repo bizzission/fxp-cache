@@ -44,6 +44,8 @@ class MemcachedAdapter extends BaseMemcachedAdapter implements AdapterInterface
      * @param string $id     The cache item id
      * @param string $prefix The full prefix
      *
+     * @throws
+     *
      * @return bool
      */
     private function doClearItem(string $id, string $prefix): bool

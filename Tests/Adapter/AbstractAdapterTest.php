@@ -38,6 +38,9 @@ abstract class AbstractAdapterTest extends TestCase
         }
     }
 
+    /**
+     * @throws
+     */
     public function testClearByPrefix(): void
     {
         $key1 = static::PREFIX_1.'foo';
@@ -89,6 +92,9 @@ abstract class AbstractAdapterTest extends TestCase
         $this->assertTrue($this->adapter->hasItem($key2));
     }
 
+    /**
+     * @throws
+     */
     public function testClearByPrefixWithDeferredItem(): void
     {
         $key1 = static::PREFIX_1.'foo';

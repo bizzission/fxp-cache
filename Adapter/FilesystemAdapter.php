@@ -47,6 +47,8 @@ class FilesystemAdapter extends BaseFilesystemAdapter implements AdapterInterfac
      * @param bool         $ok     The delete status
      * @param \SplFileInfo $file   The spl file info
      * @param string       $prefix The prefix
+     *
+     * @throws
      */
     private function doClearFile(bool &$ok, \SplFileInfo $file, string $prefix): void
     {

@@ -57,6 +57,9 @@ final class PhpArrayAdapterTest extends AbstractAdapterTest
         $this->fs->remove(sys_get_temp_dir().'/symfony-cache');
     }
 
+    /**
+     * @throws
+     */
     public function testInitialization(): void
     {
         $this->adapter = new PhpArrayAdapter(self::$file, new ArrayAdapter());
@@ -65,6 +68,9 @@ final class PhpArrayAdapterTest extends AbstractAdapterTest
         $this->assertFalse($this->adapter->hasItem('foo_bar'));
     }
 
+    /**
+     * @throws
+     */
     public function testWarmUp(): void
     {
         $values = [

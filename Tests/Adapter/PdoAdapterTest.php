@@ -28,6 +28,9 @@ final class PdoAdapterTest extends AbstractAdapterTest
      */
     protected $dbFile;
 
+    /**
+     * @throws
+     */
     protected function setUp(): void
     {
         if (!\extension_loaded('pdo_sqlite')) {
