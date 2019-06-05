@@ -42,7 +42,7 @@ final class TraceableAdapterTest extends AbstractAdapterTest
         $this->assertTrue($res);
     }
 
-    public function getAdapters()
+    public function getAdapters(): array
     {
         return [
             [new TraceableAdapter(new NullAdapter())],

@@ -49,7 +49,7 @@ final class TraceableTagAwareAdapterTest extends AbstractAdapterTest
         $this->assertTrue($res);
     }
 
-    public function getAdapters()
+    public function getAdapters(): array
     {
         /** @var \PHPUnit_Framework_MockObject_MockObject|SymfonyTagAwareInterface $symfonyAdapter */
         $symfonyAdapter = $this->getMockBuilder(SymfonyTagAwareInterface::class)->getMock();

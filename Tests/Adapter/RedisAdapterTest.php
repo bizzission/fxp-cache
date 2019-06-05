@@ -25,7 +25,7 @@ final class RedisAdapterTest extends AbstractAdapterTest
 {
     protected function setUp(): void
     {
-        if (!class_exists('\Predis\Client', true)) {
+        if (!class_exists(Client::class)) {
             $this->markTestSkipped('Predis is not installed');
         }
 

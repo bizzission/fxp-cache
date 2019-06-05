@@ -33,7 +33,7 @@ final class DoctrineAdapterTest extends AbstractAdapterTest
 
     protected function setUp(): void
     {
-        $this->adapter = new DoctrineAdapter(new ArrayCache(0), '', 0);
+        $this->adapter = new DoctrineAdapter(new ArrayCache(), '', 0);
         $this->adapter->clear();
     }
 
