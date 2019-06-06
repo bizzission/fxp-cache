@@ -13,6 +13,7 @@ namespace Fxp\Component\Cache\Tests\Adapter;
 
 use Fxp\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Fxp\Component\Cache\Adapter\TraceableTagAwareAdapter;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Cache\CacheItemInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface as SymfonyTagAwareInterface;
 
@@ -26,7 +27,7 @@ use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface as SymfonyTagAwareI
 final class TraceableTagAwareAdapterTest extends AbstractAdapterTest
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|TagAwareAdapterInterface
+     * @var MockObject|TagAwareAdapterInterface
      */
     protected $tagAwareAdapter;
 
@@ -51,7 +52,7 @@ final class TraceableTagAwareAdapterTest extends AbstractAdapterTest
 
     public function getAdapters(): array
     {
-        /** @var \PHPUnit_Framework_MockObject_MockObject|SymfonyTagAwareInterface $symfonyAdapter */
+        /** @var MockObject|SymfonyTagAwareInterface $symfonyAdapter */
         $symfonyAdapter = $this->getMockBuilder(SymfonyTagAwareInterface::class)->getMock();
         $this->mockAdapter($symfonyAdapter);
 
@@ -84,7 +85,7 @@ final class TraceableTagAwareAdapterTest extends AbstractAdapterTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|TagAwareAdapterInterface
+     * @return MockObject|TagAwareAdapterInterface
      */
     private function getTagAwareAdapter()
     {
@@ -105,7 +106,7 @@ final class TraceableTagAwareAdapterTest extends AbstractAdapterTest
     }
 
     /**
-     * @param \PHPUnit_Framework_MockObject_MockObject $adapter The mocked adapter
+     * @param MockObject $adapter The mocked adapter
      */
     private function mockAdapter($adapter): void
     {
