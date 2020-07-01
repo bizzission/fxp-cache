@@ -78,7 +78,7 @@ final class PhpArrayAdapterTest extends AbstractAdapterTest
             self::PREFIX_2.'foo' => 'bar2',
         ];
 
-        $this->assertFileNotExists(self::$file);
+        $this->assertFileDoesNotExist(self::$file);
         $this->adapter->warmUp($values);
         $this->assertFileExists(self::$file);
 
